@@ -28,7 +28,7 @@
 {% block topLeft %}{% endblock %}
 {% block topMid %}{% endblock %}
 {% block topRight %}{% endblock %}
-            {% topBorderBottom %}
+            {% block topBorderBottom %}
             <div class="col-12">
                 <div class="border-bottom border-default"></div>
             </div>
@@ -44,7 +44,7 @@
                 {% block mainRecent %}{% endblock %}
 
 
-
+{% block pagination %}{% endblock %}
             </div>
 <aside class="col-lg-4 sidebar-home">
 {% block sideBar %}
