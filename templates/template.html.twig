@@ -16,7 +16,7 @@
     {% block title %}
         {{ parent() }} Public
     {% endblock %}
-
+{% block body %}
     {% block header %}
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-white">
@@ -102,7 +102,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="">Shop</a>
+                        <a class="nav-link" href="{{ path('app_login') }}">Login</a>
                     </li>
                 </ul>
             </div>
@@ -679,3 +679,4 @@
 <!-- Main Scriptasset -->
 <script src="{{ asset('js/script.js') }}"></script>
     {% endblock %}
+{% endblock %}
