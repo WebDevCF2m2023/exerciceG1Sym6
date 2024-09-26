@@ -1,30 +1,23 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
     <meta charset="utf-8">
-    <!-- mobile responsive meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="This is meta description">
     <meta name="author" content="Themefisher">
     <meta name="generator" content="Hugo 0.74.3" />
-    <!-- theme meta -->
     <meta name="theme-name" content="reader" />
-
+    <meta name="remade-by" content="leerlandais" />
     {% block stylesheets %}{% endblock %}
-    {% block title %}<title> Lee | </title> {% endblock %}
-
+    <title>{% block title %} Lee | {% endblock %} </title>
 </head>
 <body>
-
 <header class="navigation fixed-top">
 {% block header %}{% endblock %}
 </header>
-
 {% block banner %}{% endblock %}
-
 <section class="section pb-0">
     <div class="container">
         <div class="row">
-
 {% block topLeft %}{% endblock %}
 {% block topMid %}{% endblock %}
 {% block topRight %}{% endblock %}
@@ -33,18 +26,16 @@
                 <div class="border-bottom border-default"></div>
             </div>
             {% endblock %}
-
         </div>
     </div>
 </section>
+
 <section class="section-sm">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8  mb-5 mb-lg-0">
                 {% block mainRecent %}{% endblock %}
-
-
-{% block pagination %}{% endblock %}
+                {% block pagination %}{% endblock %}
             </div>
 <aside class="col-lg-4 sidebar-home">
 {% block sideBar %}
@@ -59,8 +50,6 @@
         </div>
     </div>
 </section>
-
-
 {% block footer %}{% endblock %}
 {% block scripts %}{% endblock %}
 </body>
