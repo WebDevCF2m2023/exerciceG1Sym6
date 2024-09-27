@@ -1,0 +1,13 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}New Tag{% endblock %}
+{% block mainBody %}
+    {% block sideBar %}{% endblock %}
+
+<div class="d-flex flex-column align-items-center text-center mb-5 pb-5">
+    <h1>Create new Article</h1>
+
+    {{ include('admin_article/_form.html.twig') }}
+
+    <a href="{{ path('app_admin_article_index') }}">back to list</a>
+{% endblock %}
