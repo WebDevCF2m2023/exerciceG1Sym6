@@ -1,9 +1,10 @@
 {% extends 'admin/index.html.twig' %}
-{% block title %}Lee | Admin | Tag {% endblock %}
 
+{% block title %}New Tag{% endblock %}
+    {% block sideBar %}{% endblock %}
 {% block mainBody %}
+<div class="d-flex flex-column align-items-center text-center mb-5 pb-5">
     <h1>Tag Table</h1>
-
     <table class="table w-auto">
         <thead>
             <tr>
@@ -33,6 +34,6 @@
     </table>
 
     <a href="{{ path('app_admin_tag_new') }}">Create new</a>
-
+</div>
 {% endblock %}
 

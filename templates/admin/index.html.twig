@@ -1,4 +1,4 @@
-{% extends 'template.new.html.twig' %}
+{% extends 'template.html.twig' %}
 
     {% block title %}
         Lee | Admin | Home
@@ -13,12 +13,12 @@
                     <ul class="list-inline widget-list-inline">
                         <li class="list-inline-item"><a href="{{ path('app_admin_tag_new') }}">Add Tags</a></li>
                         <li class="list-inline-item"><a href="{{ path('app_admin_tag_index') }}">Edit Tags</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Add Categories</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Edit Categories</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Add Articles</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Edit Articles</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Add User</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Edit User</a></li>
+                        <li class="list-inline-item"><a href="{{ path('app_admin_tag_new') }}">Add Categories</a></li>
+                        <li class="list-inline-item"><a href="{{ path('app_admin_tag_index') }}">Edit Categories</a></li>
+                        <li class="list-inline-item"><a href="{{ path('app_admin_tag_new') }}">Add Articles</a></li>
+                        <li class="list-inline-item"><a href="{{ path('app_admin_tag_index') }}">Edit Articles</a></li>
+                        <li class="list-inline-item"><a href="{{ path('app_admin_tag_new') }}">Add User</a></li>
+                        <li class="list-inline-item"><a href="{{ path('app_admin_tag_index') }}">Edit User</a></li>
                     </ul>
                 </div>
             </div>

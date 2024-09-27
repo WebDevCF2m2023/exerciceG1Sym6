@@ -72,6 +72,9 @@ class Article
     #[ORM\OneToMany(targetEntity: comment::class, mappedBy: 'article', orphanRemoval: true)]
     private Collection $comments;
 
+    #[ORM\Column(length: 128, nullable: true)]
+    private ?string $article_img_loc = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -254,6 +257,18 @@ class Article
                 $comment->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getArticleImgLoc(): ?string
+    {
+        return $this->article_img_loc;
+    }
+
+    public function setArticleImgLoc(?string $article_img_loc): static
+    {
+        $this->article_img_loc = $article_img_loc;
 
         return $this;
     }
