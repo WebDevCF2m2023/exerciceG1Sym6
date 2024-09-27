@@ -4,8 +4,8 @@
     {{ parent() }} | Login
 {% endblock %}
 
-{% block body %}
-    {{ parent() }}
+{% block mainBody %}
+<div class="w-100 text-center">
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -41,5 +41,6 @@
         </button>
 </div>
     </form>
-    {% block footer %}{% endblock %}
+</div>
+
 {% endblock %}
