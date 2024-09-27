@@ -16,11 +16,12 @@ class TagType extends AbstractType
         $builder
             ->add('tag_name')
             ->add('tag_slug')
-            ->add('articles', EntityType::class, [
+       /*     ->add('articles', EntityType::class, [
                 'class' => Article::class,
                 'choice_label' => 'id',
                 'multiple' => true,
-            ])
+                'expanded' => true,
+            ]) */
         ;
     }
 

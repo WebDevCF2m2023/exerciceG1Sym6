@@ -5,14 +5,14 @@
     {% endblock %}
 {% block banner %}
     <!-- start of banner -->
-    <div class="banner text-center">
+    <div class="banner text-center mb-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 mx-auto">
                     <h1 class="mb-5">What Would You <br> Like To Do Today?</h1>
                     <ul class="list-inline widget-list-inline">
-                        <li class="list-inline-item"><a href="tags.html">Add Tags</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Edit Tags</a></li>
+                        <li class="list-inline-item"><a href="{{ path('app_admin_tag_new') }}">Add Tags</a></li>
+                        <li class="list-inline-item"><a href="{{ path('app_admin_tag_index') }}">Edit Tags</a></li>
                         <li class="list-inline-item"><a href="tags.html">Add Categories</a></li>
                         <li class="list-inline-item"><a href="tags.html">Edit Categories</a></li>
                         <li class="list-inline-item"><a href="tags.html">Add Articles</a></li>
