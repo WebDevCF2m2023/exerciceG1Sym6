@@ -1,4 +1,4 @@
-{% extends 'template.html.twig' %}
+{% extends 'template.new.html.twig' %}
 
     {% block title %}
         Lee | Admin | Home
@@ -72,4 +72,7 @@
         </svg>
     </div>
     <!-- end of banner -->
+{% endblock %}
+{% block mainBody %}
+    {{ parent() }}
 {% endblock %}

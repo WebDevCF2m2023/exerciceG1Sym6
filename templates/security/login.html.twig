@@ -1,11 +1,11 @@
-{% extends 'template.html.twig' %}
+{% extends 'template.new.html.twig' %}
 
 {% block title %}
     {{ parent() }} | Login
 {% endblock %}
 
-{% block body %}
-    {{ parent() }}
+{% block mainBody %}
+
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -16,7 +16,7 @@
                 You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
             </div>
         {% endif %}
-<div class="d-flex flex-column align-items-center w-25 mx-auto">
+<div class="d-flex flex-column align-items-center w-auto mx-auto">
         <h1 class="h3 my-5 font-weight-normal">Please sign in</h1>
         <label for="username">Username</label>
         <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="username" required autofocus>
