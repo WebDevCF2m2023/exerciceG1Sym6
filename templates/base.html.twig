@@ -1,59 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+
+
+<html lang="en"><head>
     <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="author" content="Themefisher">
-    <meta name="generator" content="Hugo 0.74.3" />
     <meta name="theme-name" content="reader" />
-    <meta name="remade-by" content="leerlandais" />
+
+    <!-- plugins -->
+    <link rel="stylesheet" href="{{ ('plugins/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ ('plugins/themify-icons/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ ('plugins/slick/slick.css') }}">
+
+    <!-- Main Stylesheet -->
     {% block stylesheets %}{% endblock %}
-    <title>{% block title %} Lee | {% endblock %} </title>
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
 {% block body %}
 
-<header class="navigation fixed-top">
-{% block header %}{% endblock %}
-</header>
-{% block banner %}{% endblock %}
-<section class="section pb-0">
-    <div class="container">
-        <div class="row">
-{% block topLeft %}{% endblock %}
-{% block topMid %}{% endblock %}
-{% block topRight %}{% endblock %}
-            {% block topBorderBottom %}
-            <div class="col-12">
-                <div class="border-bottom border-default"></div>
+    {% block header %}{% endblock %}
+    {% block banner %}{% endblock %}
+    <section class="section pb-0">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                {% block mainBody %}{% endblock %}
             </div>
-            {% endblock %}
         </div>
-    </div>
-</section>
+    </section>
+    {% block sideBar %}{% endblock %}
+    {% block footer %}{% endblock %}
+    {% block scripts %}{% endblock %}
 
-<section class="section-sm">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8  mb-5 mb-lg-0">
-                {% block mainRecent %}{% endblock %}
-                {% block pagination %}{% endblock %}
-            </div>
-<aside class="col-lg-4 sidebar-home">
-{% block sideBar %}
-    {% block sidePlug %}{% endblock %}
-    {% block sideAuth %}{% endblock %}
-    {% block sideCats %}{% endblock %}
-    {% block sideTags %}{% endblock %}
-    {% block sideRecent %}{% endblock %}
-    {% block sideSocial %}{% endblock %}
-{% endblock %} {# end sideBar #}
-</aside>
-        </div>
-    </div>
-</section>
-{% block footer %}{% endblock %}
-{% block scripts %}{% endblock %}
-{% endblock %}{# endBody #}
+{% endblock %}{# end body #}
 </body>
-</html>

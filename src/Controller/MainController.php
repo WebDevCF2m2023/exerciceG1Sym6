@@ -12,8 +12,8 @@ class MainController extends AbstractController
     #[Route('/', name: 'app_main', methods: ['GET'])]
     public function index(TagRepository $tagRepository): Response
     {
-        return $this->render('main/index.html.twig', [
-            'tags' => $tagRepository->findAll(),
+        return $this->render('template.html.twig', [
+            'controller_name' => 'MainController',
         ]);
     }
 }
