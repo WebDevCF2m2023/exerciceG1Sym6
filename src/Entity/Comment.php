@@ -42,6 +42,10 @@ class Comment
     )]
     private ?int $comment_made_by = null;
 
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Article $article = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +107,18 @@ class Comment
     public function setCommentMadeBy(int $comment_made_by): static
     {
         $this->comment_made_by = $comment_made_by;
+
+        return $this;
+    }
+
+    public function getArticle(): ?Article
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?Article $article): static
+    {
+        $this->article = $article;
 
         return $this;
     }
