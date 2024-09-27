@@ -17,11 +17,11 @@ class CategoryType extends AbstractType
             ->add('category_title')
             ->add('category_slug')
             ->add('category_description')
-            ->add('articles', EntityType::class, [
+            /* ->add('articles', EntityType::class, [
                 'class' => Article::class,
                 'choice_label' => 'id',
                 'multiple' => true,
-            ])
+            ]) */
         ;
     }
 
