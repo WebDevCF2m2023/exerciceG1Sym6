@@ -17,25 +17,25 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('article_title')
-            ->add('article_text')
+            ->add('article_text')/*
             ->add('article_date_created', null, [
                 'widget' => 'single_text',
                 'required' => false,
                 'empty_data' => date('Y-m-d H:i:s'),
-            ])/*
+            ])
             ->add('article_date_published', null, [
                 'widget' => 'single_text',
             ])
             ->add('article_date_updated', null, [
                 'widget' => 'single_text',
-            ])*/
+            ])
             ->add('article_created_by', null, [
                 'empty_data' => "1",
             ])
 
             ->add('article_visible', null, [
                 'empty_data' => false,
-            ])
+            ])*/
             ->add('article_img_loc')
             ->add('categories', EntityType::class, [
                 'class' => category::class,
@@ -48,11 +48,11 @@ class ArticleType extends AbstractType
                 'choice_label' => 'tag_name',
                 'multiple' => true,
                 'expanded' => true,
-            ])
+            ])/*
             ->add('user', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'id',
-            ])
+            ])*/
         ;
     }
 

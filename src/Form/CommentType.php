@@ -15,15 +15,15 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('comment_post_id')
-            ->add('comment_text')
+            ->add('comment_text')/*
             ->add('comment_date', null, [
                 'widget' => 'single_text',
-            ])
-            ->add('comment_visible')
-            ->add('comment_made_by')
+            ])*/
+        //    ->add('comment_visible')
+        //    ->add('comment_made_by')
             ->add('article', EntityType::class, [
                 'class' => Article::class,
-                'choice_label' => 'id',
+                'choice_label' => 'article_title',
             ])
         ;
     }
