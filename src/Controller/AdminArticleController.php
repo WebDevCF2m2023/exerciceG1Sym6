@@ -30,6 +30,7 @@ final class AdminArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $article->setArticleDateCreated(new \DateTime());
             $entityManager->persist($article);
             $entityManager->flush();
 
