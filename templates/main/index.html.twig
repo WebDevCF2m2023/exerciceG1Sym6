@@ -142,13 +142,13 @@
                 <div class="col-lg-8  mb-5 mb-lg-0">
                     <h2 class="h5 section-title">Recent Post</h2>
 
-
+{% for art in articles %}
                     <article class="card mb-4">
                         <div class="post-slider">
-                            <img src="{{ asset('images/post/post-5.jpg') }}" class="card-img-top" alt="post-thumb">
+                            <img src="{{ asset(art.articleImgLoc) }}" class="card-img-top" alt="post-thumb">
                         </div>
                         <div class="card-body">
-                            <h3 class="mb-3"><a class="post-title" href="post-details.html">How To Make Cupcakes and Cashmere Recipe At Home</a></h3>
+                            <h3 class="mb-3"><a class="post-title" href="post-details.html">{{ art.articleTitle }}</a></h3>
                             <ul class="card-meta list-inline">
                                 <li class="list-inline-item">
                                     <a href="author-single.html" class="card-meta-author">
@@ -174,7 +174,7 @@
                             <a href="post-details.html" class="btn btn-outline-primary">Read More</a>
                         </div>
                     </article>
-
+{% endfor %}
 
                     <ul class="pagination justify-content-center">
                         <li class="page-item page-item active ">
