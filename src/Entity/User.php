@@ -18,8 +18,6 @@ class User
     /**
      * @var Collection<int, article>
      */
-    #[ORM\OneToMany(targetEntity: article::class, mappedBy: 'user')]
-    private Collection $articles;
 
     public function __construct()
     {

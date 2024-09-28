@@ -24,7 +24,7 @@ class Comment
     #[ORM\Column(length: 1024)]
     private ?string $comment_text = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $comment_date = null;
 
     #[ORM\Column(
@@ -82,6 +82,7 @@ class Comment
 
     public function setCommentDate(\DateTimeInterface $comment_date): static
     {
+
         $this->comment_date = $comment_date;
 
         return $this;

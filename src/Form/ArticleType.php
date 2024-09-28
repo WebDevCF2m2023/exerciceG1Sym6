@@ -29,10 +29,10 @@ class ArticleType extends AbstractType
             ])
             ->add('article_date_updated', null, [
                 'widget' => 'single_text',
-            ])*/
+            ])
             ->add('article_created_by', null, [
                 'empty_data' => "1",
-            ])
+            ])*/
 
             ->add('article_visible', null, [
                 'empty_data' => false,
@@ -49,11 +49,11 @@ class ArticleType extends AbstractType
                 'choice_label' => 'tag_name',
                 'multiple' => true,
                 'expanded' => true,
-            ])
+            ])/*
             ->add('user', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'id',
-            ])
+            ])*/
         ;
     }
 

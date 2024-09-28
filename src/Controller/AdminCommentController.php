@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-
+use Symfony\Bundle\SecurityBundle\Security;
 #[Route('/admin/comment')]
 final class AdminCommentController extends AbstractController
 {
@@ -23,13 +23,16 @@ final class AdminCommentController extends AbstractController
     }
 
     #[Route('/new', name: 'app_admin_comment_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $security->getUser();
+            $comment->setCommentDate(new \DateTime());
+            $comment->setCommentMadeBy($user->getId());
             $entityManager->persist($comment);
             $entityManager->flush();
 

@@ -36,11 +36,12 @@ class Article
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $article_date_updated = null;
 
-    #[ORM\Column(
+    #[ORM\Column(nullable: true,
         options:[
             "unsigned" => true,
         ]
     )]
+    /*
     private ?int $article_created_by = null;
 
     #[ORM\Column(
@@ -49,6 +50,7 @@ class Article
             'default' => false,
         ]
     )]
+    */
     private ?bool $article_visible = null;
 
     /**
@@ -64,8 +66,8 @@ class Article
     private Collection $tags;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Admin $user = null;
 
     /**
      * @var Collection<int, comment>
@@ -75,6 +77,9 @@ class Article
 
     #[ORM\Column(length: 128, nullable: true)]
     private ?string $article_img_loc = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?Admin $admin = null;
 
     public function __construct()
     {
@@ -221,12 +226,12 @@ class Article
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUser(): ?Admin
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): static
+    public function setUser(?Admin $user): static
     {
         $this->user = $user;
 
@@ -271,6 +276,18 @@ class Article
     public function setArticleImgLoc(?string $article_img_loc): static
     {
         $this->article_img_loc = $article_img_loc;
+
+        return $this;
+    }
+
+    public function getAdmin(): ?Admin
+    {
+        return $this->admin;
+    }
+
+    public function setAdmin(?Admin $admin): static
+    {
+        $this->admin = $admin;
 
         return $this;
     }
