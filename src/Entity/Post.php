@@ -69,6 +69,9 @@ class Post
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $post_img_loc = null;
+
 
     public function __construct()
     {
@@ -228,6 +231,18 @@ class Post
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getPostImgLoc(): ?string
+    {
+        return $this->post_img_loc;
+    }
+
+    public function setPostImgLoc(?string $post_img_loc): static
+    {
+        $this->post_img_loc = $post_img_loc;
 
         return $this;
     }

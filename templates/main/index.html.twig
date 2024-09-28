@@ -142,18 +142,18 @@
                 <div class="col-lg-8  mb-5 mb-lg-0">
                     <h2 class="h5 section-title">Recent Post</h2>
 
-                    {% for art in articles %}
+                    {% for post in posts %}
                         <article class="card mb-4">
                             <div class="post-slider">
-                                <img src="{{ asset(art.articleImgLoc) }}" class="card-img-top" alt="post-thumb">
+                                <img src="{{ asset(post.postImgLoc) }}" class="card-img-top" alt="post-thumb">
                             </div>
                             <div class="card-body">
-                                <h3 class="mb-3"><a class="post-title" href="post-details.html">{{ art.articleTitle }}</a></h3>
+                                <h3 class="mb-3"><a class="post-title" href="post-details.html">{{ post.postTitle }}</a></h3>
                                 <ul class="card-meta list-inline">
                                     <li class="list-inline-item">
                                         <a href="author-single.html" class="card-meta-author">
                                             <img src="{{ asset('images/kate-stone.jpg') }}" alt="Kate Stone">
-                                            <span>Kate Stone</span>
+                                            <span>{{ post.id }}</span>
                                         </a>
                                     </li>
                                     <li class="list-inline-item">
@@ -170,7 +170,7 @@
                                         </ul>
                                     </li>
                                 </ul>
-                                <p>It’s no secret that the digital industry is booming. From exciting startups to global brands, companies are reaching out to digital agencies, responding to the new possibilities available.</p>
+                                <p>{{ post.postText }}</p>
                                 <a href="post-details.html" class="btn btn-outline-primary">Read More</a>
                             </div>
                         </article>
@@ -227,8 +227,8 @@
                     <div class="widget widget-categories">
                         <h4 class="widget-title"><span>Categories</span></h4>
                         <ul class="list-unstyled widget-list">
-                            {% for cat in categories %}
-                                <li><a href="{{ cat.id }}" class="d-flex">{{ cat.categoryTitle }}<small class="ml-auto">(4)</small></a></li>
+                            {% for sect in sections %}
+                                <li><a href="{{ sect.id }}" class="d-flex">{{ sect.sectionTitle }}<small class="ml-auto">(4)</small></a></li>
                             {% endfor %}
                         </ul>
                     </div><!-- tags -->
