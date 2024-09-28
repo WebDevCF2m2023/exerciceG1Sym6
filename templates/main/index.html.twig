@@ -193,33 +193,18 @@
                     <!-- authors -->
                     <div class="widget widget-author">
                         <h4 class="widget-title">Authors</h4>
+
+                        {% for user in users %}
                         <div class="media align-items-center">
                             <div class="mr-3">
                                 <img class="widget-author-image" src="{{ asset('images/john-doe.jpg') }}">
                             </div>
                             <div class="media-body">
-                                <h5 class="mb-1"><a class="post-title" href="author-single.html">Charls Xaviar</a></h5>
-                                <span>Author &amp; developer of Bexer, Biztrox theme</span>
+                                <h5 class="mb-1"><a class="post-title" href="author-single.html">{{ user.userRealName }}</a></h5>
+                                <span>{{ user.userDetails }}</span>
                             </div>
                         </div>
-                        <div class="media align-items-center">
-                            <div class="mr-3">
-                                <img class="widget-author-image" src="{{ asset('images/kate-stone.jpg') }}">
-                            </div>
-                            <div class="media-body">
-                                <h5 class="mb-1"><a class="post-title" href="author-single.html">Kate Stone</a></h5>
-                                <span>Author &amp; developer of Bexer, Biztrox theme</span>
-                            </div>
-                        </div>
-                        <div class="media align-items-center">
-                            <div class="mr-3">
-                                <img class="widget-author-image" src="{{ asset('images/john-doe.jpg') }}" alt="John Doe">
-                            </div>
-                            <div class="media-body">
-                                <h5 class="mb-1"><a class="post-title" href="author-single.html">John Doe</a></h5>
-                                <span>Author &amp; developer of Bexer, Biztrox theme</span>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
 
 
