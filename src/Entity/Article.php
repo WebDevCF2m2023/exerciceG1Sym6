@@ -26,7 +26,8 @@ class Article
     #[ORM\Column(type: Types::TEXT)]
     private ?string $article_text = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(
+        type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $article_date_created = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]

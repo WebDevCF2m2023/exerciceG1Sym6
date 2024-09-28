@@ -31,7 +31,9 @@
                 <td>{{ comment.commentMadeBy }}</td>
                 <td>
                     <a href="{{ path('app_admin_comment_show', {'id': comment.id}) }}">show</a>
+                    {% if is_granted('ROLE_EDITOR') %}
                     <a href="{{ path('app_admin_comment_edit', {'id': comment.id}) }}">edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -43,4 +45,5 @@
     </table>
 
     <a href="{{ path('app_admin_comment_new') }}">Create new</a>
+</div>
 {% endblock %}

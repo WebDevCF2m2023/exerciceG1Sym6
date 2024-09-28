@@ -9,6 +9,8 @@
     <h1>Create new Comment</h1>
 
     {{ include('admin_comment/_form.html.twig') }}
-
+    {% if is_granted('ROLE_EDITOR') %}
     <a href="{{ path('app_admin_comment_index') }}">back to list</a>
+    {% endif %}
+</div>
 {% endblock %}

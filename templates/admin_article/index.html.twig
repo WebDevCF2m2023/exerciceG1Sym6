@@ -35,7 +35,9 @@
                 <td>{{ article.articleImgLoc }}</td>
                 <td>
                     <a href="{{ path('app_admin_article_show', {'id': article.id}) }}">show</a>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('app_admin_article_edit', {'id': article.id}) }}">edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -47,4 +49,5 @@
     </table>
 
     <a href="{{ path('app_admin_article_new') }}">Create new</a>
+</div>
 {% endblock %}
