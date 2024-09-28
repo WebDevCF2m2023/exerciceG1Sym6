@@ -1,0 +1,46 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}New Tag{% endblock %}
+    {% block sideBar %}{% endblock %}
+
+{% block mainBody %}
+
+<div class="d-flex flex-column align-items-center text-center mb-5 pb-5">
+    <h1>Comment index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Comment_post_id</th>
+                <th>Comment_text</th>
+                <th>Comment_date</th>
+                <th>Comment_visible</th>
+                <th>Comment_made_by</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td>{{ comment.id }}</td>
+                <td>{{ comment.commentPostId }}</td>
+                <td>{{ comment.commentText }}</td>
+                <td>{{ comment.commentDate ? comment.commentDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ comment.commentVisible ? 'Yes' : 'No' }}</td>
+                <td>{{ comment.commentMadeBy }}</td>
+                <td>
+                    <a href="{{ path('app_admin_comment_show', {'id': comment.id}) }}">show</a>
+                    <a href="{{ path('app_admin_comment_edit', {'id': comment.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_comment_new') }}">Create new</a>
+{% endblock %}
