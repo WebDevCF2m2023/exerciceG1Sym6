@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/tag')]
 final class AdminTagController extends AbstractController
 {
-    #[Route('/', name: 'app_admin_tag_index', methods: ['GET'])]
+    #[Route(name: 'app_admin_tag_index', methods: ['GET'])]
     public function index(TagRepository $tagRepository): Response
     {
         return $this->render('admin_tag/index.html.twig', [
@@ -30,6 +30,7 @@ final class AdminTagController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $tag->setTagSlug($tag->getTagName());
             $entityManager->persist($tag);
             $entityManager->flush();
 

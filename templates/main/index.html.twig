@@ -142,39 +142,39 @@
                 <div class="col-lg-8  mb-5 mb-lg-0">
                     <h2 class="h5 section-title">Recent Post</h2>
 
-{% for art in articles %}
-                    <article class="card mb-4">
-                        <div class="post-slider">
-                            <img src="{{ asset(art.articleImgLoc) }}" class="card-img-top" alt="post-thumb">
-                        </div>
-                        <div class="card-body">
-                            <h3 class="mb-3"><a class="post-title" href="post-details.html">{{ art.articleTitle }}</a></h3>
-                            <ul class="card-meta list-inline">
-                                <li class="list-inline-item">
-                                    <a href="author-single.html" class="card-meta-author">
-                                        <img src="{{ asset('images/kate-stone.jpg') }}" alt="Kate Stone">
-                                        <span>Kate Stone</span>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <i class="ti-timer"></i>2 Min To Read
-                                </li>
-                                <li class="list-inline-item">
-                                    <i class="ti-calendar"></i>14 jan, 2020
-                                </li>
-                                <li class="list-inline-item">
-                                    <ul class="card-meta-tag list-inline">
-                                        <li class="list-inline-item"><a href="tags.html">City</a></li>
-                                        <li class="list-inline-item"><a href="tags.html">Food</a></li>
-                                        <li class="list-inline-item"><a href="tags.html">Taste</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <p>It’s no secret that the digital industry is booming. From exciting startups to global brands, companies are reaching out to digital agencies, responding to the new possibilities available.</p>
-                            <a href="post-details.html" class="btn btn-outline-primary">Read More</a>
-                        </div>
-                    </article>
-{% endfor %}
+                    {% for art in articles %}
+                        <article class="card mb-4">
+                            <div class="post-slider">
+                                <img src="{{ asset(art.articleImgLoc) }}" class="card-img-top" alt="post-thumb">
+                            </div>
+                            <div class="card-body">
+                                <h3 class="mb-3"><a class="post-title" href="post-details.html">{{ art.articleTitle }}</a></h3>
+                                <ul class="card-meta list-inline">
+                                    <li class="list-inline-item">
+                                        <a href="author-single.html" class="card-meta-author">
+                                            <img src="{{ asset('images/kate-stone.jpg') }}" alt="Kate Stone">
+                                            <span>Kate Stone</span>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <i class="ti-timer"></i>2 Min To Read
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <i class="ti-calendar"></i>14 jan, 2020
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <ul class="card-meta-tag list-inline">
+                                            <li class="list-inline-item"><a href="tags.html">City</a></li>
+                                            <li class="list-inline-item"><a href="tags.html">Food</a></li>
+                                            <li class="list-inline-item"><a href="tags.html">Taste</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <p>It’s no secret that the digital industry is booming. From exciting startups to global brands, companies are reaching out to digital agencies, responding to the new possibilities available.</p>
+                                <a href="post-details.html" class="btn btn-outline-primary">Read More</a>
+                            </div>
+                        </article>
+                    {% endfor %}
 
                     <ul class="pagination justify-content-center">
                         <li class="page-item page-item active ">
@@ -228,7 +228,7 @@
                         <h4 class="widget-title"><span>Categories</span></h4>
                         <ul class="list-unstyled widget-list">
                             {% for cat in categories %}
-                            <li><a href="{{ cat.id }}" class="d-flex">{{ cat.categoryTitle }}<small class="ml-auto">(4)</small></a></li>
+                                <li><a href="{{ cat.id }}" class="d-flex">{{ cat.categoryTitle }}<small class="ml-auto">(4)</small></a></li>
                             {% endfor %}
                         </ul>
                     </div><!-- tags -->

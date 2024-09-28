@@ -12,114 +12,97 @@ class Comment
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(
-        options:[
-            "unsigned" => true,
+        # On souhaite ne pas perdre la moitié
+        # des numériques... donc unsigned !
+        options: [
+            'unsigned' => true,
         ]
     )]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $comment_post_id = null;
+    #[ORM\Column(length: 600)]
+    private ?string $commentText = null;
 
-    #[ORM\Column(length: 1024)]
-    private ?string $comment_text = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $comment_date = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $commentDate = null;
 
     #[ORM\Column(
-        type:Types::BOOLEAN,
-        options: [
-            'default' => true,
+        options:
+        [
+            'default' => false,
         ]
     )]
-    private ?bool $comment_visible = null;
-
-    #[ORM\Column(
-        options:[
-            "unsigned" => true,
-        ]
-    )]
-    private ?int $comment_made_by = null;
+    private ?bool $commentVisible = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Article $article = null;
+    private ?Post $post = null;
+
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCommentPostId(): ?int
-    {
-        return $this->comment_post_id;
-    }
-
-    public function setCommentPostId(int $comment_post_id): static
-    {
-        $this->comment_post_id = $comment_post_id;
-
-        return $this;
-    }
-
     public function getCommentText(): ?string
     {
-        return $this->comment_text;
+        return $this->commentText;
     }
 
-    public function setCommentText(string $comment_text): static
+    public function setCommentText(string $commentText): static
     {
-        $this->comment_text = $comment_text;
+        $this->commentText = $commentText;
 
         return $this;
     }
 
     public function getCommentDate(): ?\DateTimeInterface
     {
-        return $this->comment_date;
+        return $this->commentDate;
     }
 
-    public function setCommentDate(\DateTimeInterface $comment_date): static
+    public function setCommentDate(\DateTimeInterface $commentDate): static
     {
-
-        $this->comment_date = $comment_date;
+        $this->commentDate = $commentDate;
 
         return $this;
     }
 
     public function isCommentVisible(): ?bool
     {
-        return $this->comment_visible;
+        return $this->commentVisible;
     }
 
-    public function setCommentVisible(bool $comment_visible): static
+    public function setCommentVisible(bool $commentVisible): static
     {
-        $this->comment_visible = $comment_visible;
+        $this->commentVisible = $commentVisible;
 
         return $this;
     }
 
-    public function getCommentMadeBy(): ?int
+    public function getPost(): ?Post
     {
-        return $this->comment_made_by;
+        return $this->post;
     }
 
-    public function setCommentMadeBy(int $comment_made_by): static
+    public function setPost(?Post $post): static
     {
-        $this->comment_made_by = $comment_made_by;
+        $this->post = $post;
 
         return $this;
     }
 
-    public function getArticle(): ?Article
+    public function getUser(): ?User
     {
-        return $this->article;
+        return $this->user;
     }
 
-    public function setArticle(?Article $article): static
+    public function setUser(?User $user): static
     {
-        $this->article = $article;
+        $this->user = $user;
 
         return $this;
     }

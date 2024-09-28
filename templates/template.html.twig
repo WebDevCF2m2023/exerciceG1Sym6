@@ -14,23 +14,23 @@
     <!-- start of banner -->
     <div class="banner text-center">
         {% block bannerHead %}
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-9 mx-auto">
-                    <h1 class="mb-5">What Would You <br> Like To Cook Today?</h1>
-                    <ul class="list-inline widget-list-inline">
-                        {% block bannerList %}
-
-                            {% for tag in tags %}
-                                <li class="list-inline-item"><a href="{{ tag.id }}">{{ tag.tagName }}</a></li>
-                            {% endfor %}
-
-                        {% endblock %}
-                    </ul>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 mx-auto">
+                        <h1 class="mb-5">What Would You <br> Like To Cook Today?</h1>
+                        <ul class="list-inline widget-list-inline">
+                            {% block bannerList %}
+{#
+                                {% for tag in tags %}
+                                    <li class="list-inline-item"><a href="{{ tag.id }}">{{ tag.tagName }}</a></li>
+                                {% endfor %}
+#}
+                            {% endblock %}
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-{% endblock %}
+        {% endblock %}
 
         <svg class="banner-shape-1" width="39" height="40" viewBox="0 0 39 40" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0.965848 20.6397L0.943848 38.3906L18.6947 38.4126L18.7167 20.6617L0.965848 20.6397Z" stroke="#040306"

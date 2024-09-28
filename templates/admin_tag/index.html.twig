@@ -1,16 +1,17 @@
 {% extends 'admin/index.html.twig' %}
 
-{% block title %}New Tag{% endblock %}
+{% block title %}{{ parent() }} | Tags{% endblock %}
     {% block sideBar %}{% endblock %}
 {% block mainBody %}
 <div class="d-flex flex-column align-items-center text-center mb-5 pb-5">
-    <h1>Tag Table</h1>
-    <table class="table w-auto">
+    <h1>Tag index</h1>
+
+    <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Tag_name</th>
-                <th>Tag_slug</th>
+                <th>TagName</th>
+                <th>TagSlug</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -36,4 +37,3 @@
     <a href="{{ path('app_admin_tag_new') }}">Create new</a>
 </div>
 {% endblock %}
-

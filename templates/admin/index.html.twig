@@ -1,8 +1,8 @@
 {% extends 'template.html.twig' %}
 
-    {% block title %}
-        Lee | Admin | Home
-    {% endblock %}
+{% block title %}Admin | Main{% endblock %}
+
+
 {% block banner %}
     <!-- start of banner -->
     <div class="banner text-center mb-5">
@@ -11,16 +11,30 @@
                 <div class="col-lg-9 mx-auto">
                     <h1 class="mb-5">What Would You <br> Like To Do Today?</h1>
                     <ul class="list-inline widget-list-inline">
-                        <li class="list-inline-item"><a href="{{ path('app_admin_comment_index') }}">Edit Comments</a></li>
-                        <li class="list-inline-item"><a href="{{ path('app_admin_article_new') }}">Add Articles</a></li>
-                        {% if is_granted("ROLE_MANAGER") %}
-                        <li class="list-inline-item"><a href="{{ path('app_admin_tag_new') }}">Add Tags</a></li>
-                        <li class="list-inline-item"><a href="{{ path('app_admin_category_new') }}">Add Categories</a></li>
-                        {% endif %}
                         {% if is_granted("ROLE_ADMIN") %}
+                        <li class="list-inline-item"><a href="{{ path('app_admin_comment_new') }}">Add Comments</a></li>
+                        <li class="list-inline-item"><a href="{{ path('app_admin_comment_index') }}">Edit Comments</a></li>
+                        <li class="list-inline-item"><a href="{{ path('app_admin_post_new') }}">Add Posts</a></li>
+                        <li class="list-inline-item"><a href="{{ path('app_admin_post_index') }}">Edit Post</a></li>
+                        <li class="list-inline-item"><a href="{{ path('app_admin_section_new') }}">Add Sections</a></li>
+                        <li class="list-inline-item"><a href="{{ path('app_admin_section_index') }}">Edit Sections</a></li>
+                        <li class="list-inline-item"><a href="{{ path('app_admin_tag_new') }}">Add Tags</a></li>
                         <li class="list-inline-item"><a href="{{ path('app_admin_tag_index') }}">Edit Tags</a></li>
-                        <li class="list-inline-item"><a href="{{ path('app_admin_category_index') }}">Edit Categories</a></li>
-                        <li class="list-inline-item"><a href="{{ path('app_admin_article_index') }}">Edit Articles</a></li>
+                        {% else %}
+                        {% if is_granted("ROLE_MANAGER") %}
+                            <li class="list-inline-item"><a href="{{ path('app_admin_comment_new') }}">Add Comments</a></li>
+                            <li class="list-inline-item"><a href="{{ path('app_admin_comment_index') }}">Edit Comments</a></li>
+                            <li class="list-inline-item"><a href="{{ path('app_admin_post_new') }}">Add Posts</a></li>
+                            <li class="list-inline-item"><a href="{{ path('app_admin_post_index') }}">Edit Post</a></li>
+                            <li class="list-inline-item"><a href="{{ path('app_admin_section_new') }}">Add Sections</a></li>
+                            <li class="list-inline-item"><a href="{{ path('app_admin_tag_new') }}">Add Tags</a></li>
+                        {% else %}
+                        {% if is_granted("ROLE_EDITOR") %}
+                            <li class="list-inline-item"><a href="{{ path('app_admin_comment_new') }}">Add Comments</a></li>
+                            <li class="list-inline-item"><a href="{{ path('app_admin_comment_index') }}">Edit Comments</a></li>
+                            <li class="list-inline-item"><a href="{{ path('app_admin_post_new') }}">Add Posts</a></li>
+                        {% endif %}
+                        {% endif %}
                         {% endif %}
                     </ul>
                 </div>

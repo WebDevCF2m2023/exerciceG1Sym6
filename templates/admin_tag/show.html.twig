@@ -1,24 +1,23 @@
 {% extends 'admin/index.html.twig' %}
 
-{% block title %}New Tag{% endblock %}
-{% block mainBody %}
+{% block title %}{{ parent() }} | Tags{% endblock %}
     {% block sideBar %}{% endblock %}
-
+{% block mainBody %}
 <div class="d-flex flex-column align-items-center text-center mb-5 pb-5">
     <h1>Tag</h1>
 
-    <table class="table w-auto">
+    <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ tag.id }}</td>
             </tr>
             <tr>
-                <th>Tag_name</th>
+                <th>TagName</th>
                 <td>{{ tag.tagName }}</td>
             </tr>
             <tr>
-                <th>Tag_slug</th>
+                <th>TagSlug</th>
                 <td>{{ tag.tagSlug }}</td>
             </tr>
         </tbody>

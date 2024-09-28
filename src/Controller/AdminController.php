@@ -8,11 +8,12 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class AdminController extends AbstractController
 {
-    #[Route('/admin', name: 'app_admin')]
-    public function index(): Response
+    #[Route('/', name: 'app_admin')]
+    public function index(SecurityController $security): Response
     {
+        $user = $security->getUser();
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
+            'user' => $user,
         ]);
     }
 }

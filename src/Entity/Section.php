@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\TagRepository;
+use App\Repository\SectionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: TagRepository::class)]
-class Tag
+#[ORM\Entity(repositoryClass: SectionRepository::class)]
+class Section
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,16 +21,16 @@ class Tag
     )]
     private ?int $id = null;
 
-    #[ORM\Column(length: 60)]
-    private ?string $tagName = null;
+    #[ORM\Column(length: 120)]
+    private ?string $sectionTitle = null;
 
-    #[ORM\Column(length: 65)]
-    private ?string $tagSlug = null;
+    #[ORM\Column(length: 600, nullable: true)]
+    private ?string $sectionDescription = null;
 
     /**
      * @var Collection<int, Post>
      */
-    #[ORM\ManyToMany(targetEntity: Post::class, mappedBy: 'tags')]
+    #[ORM\ManyToMany(targetEntity: Post::class, mappedBy: 'sections')]
     private Collection $posts;
 
     public function __construct()
@@ -43,26 +43,26 @@ class Tag
         return $this->id;
     }
 
-    public function getTagName(): ?string
+    public function getSectionTitle(): ?string
     {
-        return $this->tagName;
+        return $this->sectionTitle;
     }
 
-    public function setTagName(string $tagName): static
+    public function setSectionTitle(string $sectionTitle): static
     {
-        $this->tagName = $tagName;
+        $this->sectionTitle = $sectionTitle;
 
         return $this;
     }
 
-    public function getTagSlug(): ?string
+    public function getSectionDescription(): ?string
     {
-        return $this->tagSlug;
+        return $this->sectionDescription;
     }
 
-    public function setTagSlug(string $tagSlug): static
+    public function setSectionDescription(?string $sectionDescription): static
     {
-        $this->tagSlug = $tagSlug;
+        $this->sectionDescription = $sectionDescription;
 
         return $this;
     }
@@ -79,7 +79,7 @@ class Tag
     {
         if (!$this->posts->contains($post)) {
             $this->posts->add($post);
-            $post->addTag($this);
+            $post->addSection($this);
         }
 
         return $this;
@@ -88,7 +88,7 @@ class Tag
     public function removePost(Post $post): static
     {
         if ($this->posts->removeElement($post)) {
-            $post->removeTag($this);
+            $post->removeSection($this);
         }
 
         return $this;
