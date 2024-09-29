@@ -213,7 +213,7 @@
                         <h4 class="widget-title"><span>Categories</span></h4>
                         <ul class="list-unstyled widget-list">
                             {% for sect in sections %}
-                                <li><a href="{{ sect.id }}" class="d-flex">{{ sect.sectionTitle }}<small class="ml-auto">(4)</small></a></li>
+                                <li><a href="{{ path('app_section', {id: sect.id}) }}" class="d-flex">{{ sect.sectionTitle }}<small class="ml-auto">(4)</small></a></li>
                             {% endfor %}
                         </ul>
                     </div><!-- tags -->

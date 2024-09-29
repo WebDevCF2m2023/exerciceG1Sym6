@@ -37,4 +37,22 @@ class MainController extends AbstractController
             'posts' => $posts
         ]);
     }
+
+    #[Route('/section/{id}', name: 'app_section', methods: ['GET'])]
+    public function section(SectionRepository $sectionRepository, int $id): Response
+    {
+        $sections = $sectionRepository->getPostsBySectionId($id);
+        return $this->render('main/section.html.twig', [
+            'sections' => $sections
+        ]);
+    }
+
+    #[Route('/tag/{id}', name: 'app_tag', methods: ['GET'])]
+    public function tag(TagRepository $tagRepository, int $id): Response
+    {
+        $tags = $tagRepository->getPostsByTagId($id);
+        return $this->render('main/tag.html.twig', [
+            'tags' => $tags
+        ]);
+    }
 }
