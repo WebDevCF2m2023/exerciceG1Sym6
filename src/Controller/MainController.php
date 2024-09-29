@@ -39,9 +39,9 @@ class MainController extends AbstractController
     }
 
     #[Route('/section/{id}', name: 'app_section', methods: ['GET'])]
-    public function section(SectionRepository $sectionRepository, int $id): Response
+    public function section(PostRepository $postRepository, int $id): Response
     {
-        $sections = $sectionRepository->getPostsBySectionId($id);
+        $sections = $postRepository->getPostsBySectionId($id);
         return $this->render('main/section.html.twig', [
             'sections' => $sections
         ]);

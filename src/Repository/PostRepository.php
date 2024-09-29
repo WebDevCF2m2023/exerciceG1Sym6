@@ -64,4 +64,26 @@ class PostRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getPostsBySectionId(string $sectionId) : array
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.sections', 's')
+            ->where('p.postIsPublished = :published')
+            ->setParameter('published', true)
+            ->andWhere('s.id = :sectionId')
+            ->setParameter('sectionId', $sectionId)
+            ->orderBy('p.postDateCreated', 'DESC') 
+            ->getQuery()
+            ->getResult();
+    }
 }
+/*
+SELECT  p.* FROM section s
+LEFT JOIN post_section phs
+ON phs.section_id = s.id
+LEFT JOIN post p
+ON p.id = phs.post_id
+WHERE p.post_is_published = true
+AND s.id = ?
+ */
