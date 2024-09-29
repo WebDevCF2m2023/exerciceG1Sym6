@@ -65,6 +65,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $userDetails = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $userImgLoc = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -250,6 +253,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUserDetails(?string $userDetails): static
     {
         $this->userDetails = $userDetails;
+
+        return $this;
+    }
+
+    public function getUserImgLoc(): ?string
+    {
+        return $this->userImgLoc;
+    }
+
+    public function setUserImgLoc(?string $userImgLoc): static
+    {
+        $this->userImgLoc = $userImgLoc;
 
         return $this;
     }

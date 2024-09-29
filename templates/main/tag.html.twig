@@ -1,0 +1,11 @@
+{% extends 'template.html.twig' %}
+
+    {% block title %}
+        {{ parent() }} Tag
+    {% endblock %}
+
+{% block mainBody %}
+    {% for tag in tags %}
+        <p>{{ tag.postTitle }}</p>
+    {% endfor %}
+{% endblock %}

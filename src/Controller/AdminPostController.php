@@ -15,6 +15,14 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/post')]
 final class AdminPostController extends AbstractController
 {
+
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     #[Route(name: 'app_admin_post_index', methods: ['GET'])]
     public function index(PostRepository $postRepository): Response
     {
@@ -34,7 +42,9 @@ final class AdminPostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $post->setPostDateCreated(new \DateTime());
             $post->setUser($user);
+            if ($this->security->isGranted('ROLE_EDITOR')) {
             $post->setPostIsPublished(false);
+                }
             $entityManager->persist($post);
             $entityManager->flush();
 
@@ -62,6 +72,7 @@ final class AdminPostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $post->setPostDatePublished(new \DateTime());
             $entityManager->flush();
 
             return $this->redirectToRoute('app_admin_post_index', [], Response::HTTP_SEE_OTHER);

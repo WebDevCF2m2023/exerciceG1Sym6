@@ -145,15 +145,15 @@
                     {% for post in posts %}
                         <article class="card mb-4">
                             <div class="post-slider">
-                                <img src="{{ asset(post.postImgLoc) }}" class="card-img-top" alt="post-thumb">
+                                <img src="{{ asset(post.postImgLoc | default('https://placehold.co/730x365')) }}" class="card-img-top" alt="post-thumb">
                             </div>
                             <div class="card-body">
                                 <h3 class="mb-3"><a class="post-title" href="post-details.html">{{ post.postTitle }}</a></h3>
                                 <ul class="card-meta list-inline">
                                     <li class="list-inline-item">
-                                        <a href="author-single.html" class="card-meta-author">
-                                            <img src="{{ asset('images/kate-stone.jpg') }}" alt="Kate Stone">
-                                            <span>{{ post.id }}</span>
+                                        <a href="{{ path('app_author', {id: post.user.id}) }}" class="card-meta-author">
+                                            <img src="{{ asset(post.user.userImgLoc) }}" alt="{{ post.user.userRealName }}">
+                                            <span>{{ post.user.userRealName }}</span>
                                         </a>
                                     </li>
                                     <li class="list-inline-item">
@@ -193,33 +193,18 @@
                     <!-- authors -->
                     <div class="widget widget-author">
                         <h4 class="widget-title">Authors</h4>
+
+                        {% for user in users %}
                         <div class="media align-items-center">
                             <div class="mr-3">
                                 <img class="widget-author-image" src="{{ asset('images/john-doe.jpg') }}">
                             </div>
                             <div class="media-body">
-                                <h5 class="mb-1"><a class="post-title" href="author-single.html">Charls Xaviar</a></h5>
-                                <span>Author &amp; developer of Bexer, Biztrox theme</span>
+                                <h5 class="mb-1"><a class="post-title" href="{{ path('app_author', {id: user.id}) }}">{{ user.userRealName }}</a></h5>
+                                <span>{{ user.userDetails }}</span>
                             </div>
                         </div>
-                        <div class="media align-items-center">
-                            <div class="mr-3">
-                                <img class="widget-author-image" src="{{ asset('images/kate-stone.jpg') }}">
-                            </div>
-                            <div class="media-body">
-                                <h5 class="mb-1"><a class="post-title" href="author-single.html">Kate Stone</a></h5>
-                                <span>Author &amp; developer of Bexer, Biztrox theme</span>
-                            </div>
-                        </div>
-                        <div class="media align-items-center">
-                            <div class="mr-3">
-                                <img class="widget-author-image" src="{{ asset('images/john-doe.jpg') }}" alt="John Doe">
-                            </div>
-                            <div class="media-body">
-                                <h5 class="mb-1"><a class="post-title" href="author-single.html">John Doe</a></h5>
-                                <span>Author &amp; developer of Bexer, Biztrox theme</span>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
 
 
@@ -228,7 +213,7 @@
                         <h4 class="widget-title"><span>Categories</span></h4>
                         <ul class="list-unstyled widget-list">
                             {% for sect in sections %}
-                                <li><a href="{{ sect.id }}" class="d-flex">{{ sect.sectionTitle }}<small class="ml-auto">(4)</small></a></li>
+                                <li><a href="{{ path('app_section', {id: sect.id}) }}" class="d-flex">{{ sect.sectionTitle }}<small class="ml-auto">(4)</small></a></li>
                             {% endfor %}
                         </ul>
                     </div><!-- tags -->
@@ -236,7 +221,7 @@
                         <h4 class="widget-title"><span>Tags</span></h4>
                         <ul class="list-inline widget-list-inline widget-card">
                             {% for tag in tags %}
-                                <li class="list-inline-item"><a href="{{ tag.id }}">{{ tag.tagName }}</a></li>
+                                <li class="list-inline-item"><a href="{{ path('app_tag', {id: tag.id}) }}">{{ tag.tagName }}</a></li>
                             {% endfor %}
                         </ul>
                     </div><!-- recent post -->
