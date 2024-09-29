@@ -40,4 +40,16 @@ class PostRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function getPublishedPosts(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.postIsPublished = :published')
+            ->setParameter('published', true)
+            ->orderBy('p.postDateCreated', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+
 }
