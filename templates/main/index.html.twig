@@ -148,7 +148,7 @@
                                 <img src="{{ asset(post.postImgLoc | default('https://placehold.co/730x365')) }}" class="card-img-top" alt="post-thumb">
                             </div>
                             <div class="card-body">
-                                <h3 class="mb-3"><a class="post-title" href="post-details.html">{{ post.postTitle }}</a></h3>
+                                <h3 class="mb-3"><a class="post-title" href="{{ path('app_post_show', {id: post.id}) }}">{{ post.postTitle }}</a></h3>
                                 <ul class="card-meta list-inline">
                                     <li class="list-inline-item">
                                         <a href="{{ path('app_author', {id: post.user.id}) }}" class="card-meta-author">
@@ -171,7 +171,7 @@
                                     </li>
                                 </ul>
                                 <p>{{ post.postText }}</p>
-                                <a href="post-details.html" class="btn btn-outline-primary">Read More</a>
+                                <a href="{{ path('app_post_show', {id: post.id}) }}" class="btn btn-outline-primary">Read More</a>
                             </div>
                         </article>
                     {% endfor %}

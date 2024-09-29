@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Post;
 use App\Repository\PostRepository;
 use App\Repository\SectionRepository;
 use App\Repository\TagRepository;
@@ -28,7 +29,13 @@ class MainController extends AbstractController
         ]);
     }
 
-
+    #[Route('/post/{id}', name: 'app_post_show', methods: ['GET'])]
+    public function show(Post $post): Response
+    {
+        return $this->render('main/showPost.html.twig', [
+            'post' => $post,
+        ]);
+    }
     #[Route('/author/{id}', name: 'app_author', methods: ['GET'])]
     public function author(PostRepository $postRepository, int $id): Response
     {
