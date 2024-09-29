@@ -29,5 +29,12 @@ class MainController extends AbstractController
     }
 
 
-
+    #[Route('/author/{id}', name: 'app_author', methods: ['GET'])]
+    public function author(PostRepository $postRepository, int $id): Response
+    {
+        $posts = $postRepository->getPostsByAuthorId($id);
+        return $this->render('main/author.html.twig', [
+            'posts' => $posts
+        ]);
+    }
 }

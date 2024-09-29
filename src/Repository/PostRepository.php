@@ -51,5 +51,17 @@ class PostRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-
+    public function getPostsByAuthorId(string $authorId): array
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.user', 'u')
+            ->addSelect('u')
+            ->where('p.postIsPublished = :published')
+            ->setParameter('published', true)
+            ->andWhere('u.id = :id')
+            ->setParameter('id', $authorId)
+            ->orderBy('p.postDateCreated', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

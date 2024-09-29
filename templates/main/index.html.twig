@@ -145,13 +145,13 @@
                     {% for post in posts %}
                         <article class="card mb-4">
                             <div class="post-slider">
-                                <img src="{{ asset(post.postImgLoc) }}" class="card-img-top" alt="post-thumb">
+                                <img src="{{ asset(post.postImgLoc | default('https://placehold.co/730x365')) }}" class="card-img-top" alt="post-thumb">
                             </div>
                             <div class="card-body">
                                 <h3 class="mb-3"><a class="post-title" href="post-details.html">{{ post.postTitle }}</a></h3>
                                 <ul class="card-meta list-inline">
                                     <li class="list-inline-item">
-                                        <a href="author-single.html" class="card-meta-author">
+                                        <a href="{{ path('app_author', {id: post.user.id}) }}" class="card-meta-author">
                                             <img src="{{ asset(post.user.userImgLoc) }}" alt="{{ post.user.userRealName }}">
                                             <span>{{ post.user.userRealName }}</span>
                                         </a>
