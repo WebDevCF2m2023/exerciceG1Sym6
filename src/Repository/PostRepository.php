@@ -73,11 +73,9 @@ class PostRepository extends ServiceEntityRepository
             ->setParameter('published', true)
             ->andWhere('s.id = :sectionId')
             ->setParameter('sectionId', $sectionId)
-            ->orderBy('p.postDateCreated', 'DESC') 
+            ->orderBy('p.postDateCreated', 'DESC')
             ->getQuery()
             ->getResult();
-    }
-}
 /*
 SELECT  p.* FROM section s
 LEFT JOIN post_section phs
@@ -87,3 +85,27 @@ ON p.id = phs.post_id
 WHERE p.post_is_published = true
 AND s.id = ?
  */
+    }
+
+    public function getPostsByTagId(string $tagId) : array
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.tags', 't')
+            ->where('p.postIsPublished = :published')
+            ->setParameter('published', true)
+            ->andWhere('t.id = :tagId')
+            ->setParameter('tagId', $tagId)
+            ->orderBy('p.postDateCreated', 'DESC')
+            ->getQuery()
+            ->getResult();
+        /*
+SELECT  p.* FROM tag t
+LEFT JOIN post_tag pht
+ON pht.tag_id = t.id
+LEFT JOIN post p
+ON p.id = pht.post_id
+WHERE p.post_is_published = true
+AND t.id = 2
+         */
+    }
+}

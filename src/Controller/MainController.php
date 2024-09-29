@@ -48,9 +48,9 @@ class MainController extends AbstractController
     }
 
     #[Route('/tag/{id}', name: 'app_tag', methods: ['GET'])]
-    public function tag(TagRepository $tagRepository, int $id): Response
+    public function tag(PostRepository $postRepository, int $id): Response
     {
-        $tags = $tagRepository->getPostsByTagId($id);
+        $tags = $postRepository->getPostsByTagId($id);
         return $this->render('main/tag.html.twig', [
             'tags' => $tags
         ]);
