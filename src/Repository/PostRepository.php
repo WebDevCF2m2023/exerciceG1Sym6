@@ -40,4 +40,72 @@ class PostRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function getPublishedPosts(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.postIsPublished = :published')
+            ->setParameter('published', true)
+            ->orderBy('p.postDateCreated', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getPostsByAuthorId(string $authorId): array
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.user', 'u')
+            ->addSelect('u')
+            ->where('p.postIsPublished = :published')
+            ->setParameter('published', true)
+            ->andWhere('u.id = :id')
+            ->setParameter('id', $authorId)
+            ->orderBy('p.postDateCreated', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getPostsBySectionId(string $sectionId) : array
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.sections', 's')
+            ->where('p.postIsPublished = :published')
+            ->setParameter('published', true)
+            ->andWhere('s.id = :sectionId')
+            ->setParameter('sectionId', $sectionId)
+            ->orderBy('p.postDateCreated', 'DESC')
+            ->getQuery()
+            ->getResult();
+/*
+SELECT  p.* FROM section s
+LEFT JOIN post_section phs
+ON phs.section_id = s.id
+LEFT JOIN post p
+ON p.id = phs.post_id
+WHERE p.post_is_published = true
+AND s.id = ?
+ */
+    }
+
+    public function getPostsByTagId(string $tagId) : array
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.tags', 't')
+            ->where('p.postIsPublished = :published')
+            ->setParameter('published', true)
+            ->andWhere('t.id = :tagId')
+            ->setParameter('tagId', $tagId)
+            ->orderBy('p.postDateCreated', 'DESC')
+            ->getQuery()
+            ->getResult();
+        /*
+SELECT  p.* FROM tag t
+LEFT JOIN post_tag pht
+ON pht.tag_id = t.id
+LEFT JOIN post p
+ON p.id = pht.post_id
+WHERE p.post_is_published = true
+AND t.id = 2
+         */
+    }
 }

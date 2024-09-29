@@ -1,0 +1,11 @@
+{% extends 'template.html.twig' %}
+
+    {% block title %}
+        {{ parent() }} Section
+    {% endblock %}
+
+{% block mainBody %}
+    {% for section in sections %}
+        <p>{{ section.postTitle }}</p>
+    {% endfor %}
+{% endblock %}
