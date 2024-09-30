@@ -8,7 +8,7 @@
     <div class="col-lg-4 mb-5">
         <h2 class="h5 section-title">Editors Pick</h2>
         {% set rand = random(posts) %}
-{{ dump(rand) }}
+
         <article class="card">
             <div class="post-slider slider-sm">
                 <img src="{{ asset(rand.postImgLoc) }}" class="card-img-top" alt="post-thumb">
@@ -19,7 +19,7 @@
                 <ul class="card-meta list-inline">
                     <li class="list-inline-item">
                         <a href="{{ path('app_author', {id: rand.id}) }}" class="card-meta-author">
-                            <img src="{{ asset('images/author-.jpg') }}">
+                            <img src="{{ asset('images/author-1.jpg') }}">
                             <span>{{ rand.user.userRealName }}</span>
                         </a>
                     </li>
@@ -146,6 +146,7 @@
                     <h2 class="h5 section-title">Recent Post</h2>
 
                     {% for post in posts %}
+
                         <article class="card mb-4">
                             <div class="post-slider">
                                 <img src="{{ asset(post.postImgLoc | default('https://placehold.co/730x365')) }}" class="card-img-top" alt="post-thumb">
@@ -200,7 +201,7 @@
                         {% for user in users %}
                         <div class="media align-items-center">
                             <div class="mr-3">
-                                <img class="widget-author-image" src="{{ asset('images/john-doe.jpg') }}">
+                                <img class="widget-author-image" src="{{ asset(user.userImgLoc) }}">
                             </div>
                             <div class="media-body">
                                 <h5 class="mb-1"><a class="post-title" href="{{ path('app_author', {id: user.id}) }}">{{ user.userRealName }}</a></h5>
