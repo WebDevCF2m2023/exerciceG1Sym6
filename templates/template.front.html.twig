@@ -1,22 +1,78 @@
 {% extends 'base.html.twig' %}
 
- {% block stylesheets %}
-{{ parent() }}
+{% block title %}Accueil | {{ parent() }}{% endblock %}
+
+{% block body %}
+ {% block nav %}
+  {% include 'main/_menu.html.twig' %}
  {% endblock %}
 
-{% block javascripts %}
-<!-- JS Plugins -->
-<script src="../datas/logbook-bootstrap-main/theme/plugins/jQuery/jquery.min.js"></script>
-<script src="../datas/logbook-bootstrap-main/theme/plugins/bootstrap/bootstrap.min.js" async></script>
-<script src="../datas/logbook-bootstrap-main/theme/plugins/slick/slick.min.js"></script>
+ {% block banner %}
+  <!-- Bannière -->
+  <div class="banner text-center">
+   <div class="container">
+    <div class="row">
+     <div class="col-lg-9 mx-auto">
+      <h1 class="mb-5">What Would You <br> Like To Read Today?</h1>
+      <ul class="list-inline widget-list-inline">
+       <li class="list-inline-item"><a href="#">City</a></li>
+       <li class="list-inline-item"><a href="#">Color</a></li>
+       <!-- Ajouter plus de catégories ici -->
+      </ul>
+     </div>
+    </div>
+   </div>
+  </div>
+ {% endblock %}
 
-<!-- Main Script -->
-<script src="js/script.js"></script>
+ {% block content %}
+  <!-- Contenu principal -->
+  <section class="section pb-0">
+   <div class="container">
+    <div class="row">
+     <div class="col-lg-4 mb-5">
+      <h2 class="h5 section-title">Editors Pick</h2>
+      <!-- Exemple d'article -->
+      <article class="card">
+       <div class="post-slider slider-sm">
+        <img src="{{ asset('images/post/post-1.jpg') }}" class="card-img-top" alt="post-thumb">
+       </div>
+       <div class="card-body">
+        <h3 class="h4 mb-3"><a class="post-title" href="#">Title of the article</a></h3>
+        <p>Short description of the article.</p>
+        <a href="#" class="btn btn-outline-primary">Read More</a>
+       </div>
+      </article>
+     </div>
+     <!-- Ajouter d'autres sections comme "Trending Post", "Popular Post", etc. -->
+    </div>
+   </div>
+  </section>
+ {% endblock %}
+
+ {% block footer %}
+  <footer class="footer">
+   <div class="container">
+    <div class="row align-items-center">
+     <div class="col-md-5 text-center text-md-left mb-4">
+      <ul class="list-inline footer-list mb-0">
+       <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+       <li class="list-inline-item"><a href="#">Terms Conditions</a></li>
+      </ul>
+     </div>
+     <div class="col-md-2 text-center mb-4">
+      <a href="{{ path('homepage') }}">
+       <img class="img-fluid" width="100px" src="{{ asset('images/logo.png') }}" alt="Logo">
+      </a>
+     </div>
+     <div class="col-md-5 text-md-right text-center mb-4">
+      <ul class="list-inline footer-list mb-0">
+       <li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a></li>
+       <li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </footer>
+ {% endblock %}
 {% endblock %}
-
-{% block content %}
-   {% block nav %}
-      {% include 'main/_menu.html.twig' %}
-   {% endblock %}
-{% endblock %}
-

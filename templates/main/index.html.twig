@@ -1,12 +1,13 @@
 {% extends 'template.front.html.twig' %}
 
-{% block title %}{{parent()}}{% endblock %}
-
 
 {% block body %}
     {% block nav %}
         {{ parent() }}
     {% endblock %}
+    {% block content %}
+        {{ parent() }}
+        {% endblock %}
 
 <div class="example-wrapper">
     <h1> {{ title }} </h1>
