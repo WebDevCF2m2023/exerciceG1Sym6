@@ -110,4 +110,38 @@ AND t.id = 2
          */
     }
 
+    public function getPostsAndAllInfo()
+    {
+
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.user', 'u')
+            ->addSelect('u')
+            ->leftJoin('p.sections', 's')
+            ->addSelect('s')
+            ->leftJoin('p.tags', 't')
+            ->addSelect('t')
+            ->where('p.postIsPublished = :published')
+            ->setParameter('published', true)
+            ->orderBy('p.postDateCreated', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        /*
+SELECT p.*, u.*, s.*, t.* FROM `post` p
+LEFT JOIN user u
+ON u.id = p.user_id
+LEFT JOIN post_section phs
+ON phs.post_id = p.id
+LEFT JOIN section s
+ON phs.section_id = s.id
+LEFT JOIN post_tag pht
+ON pht.post_id = p.id
+LEFT JOIN tag t
+ON t.id = pht.tag_id
+WHERE p.post_is_published = true
+ORDER BY p.post_date_created DESC
+         */
+    }
+
+
 }
