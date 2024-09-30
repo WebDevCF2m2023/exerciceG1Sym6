@@ -1,0 +1,36 @@
+{% extends 'template.front.html.twig' %}
+
+
+{% block title %}{{ parent() }} {% endblock %}
+
+
+{% block header %}
+    <h1 class="text-center mt-5">{{ title }}</h1>
+    <p class="mt-5 text-center">{{ homepage_text }}</p>
+{% endblock %}
+
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            {% for post in section.posts %}
+                <div class="col-md-12">
+                    <h3>{{ post.postTitle }}</h3>
+                    <p>
+                        Ecrit par <strong>{{ post.user.username }}</strong> le {{ post.postDateCreated|date("d/m/Y \à H:i") }}
+                    </p>
+                    <p>{{ post.postText }}</p>
+
+                    {# Affichage des sections liées à ce post #}
+                    {% for section in post.sections %}
+                        <a href="#">{{ section.sectionTitle }}</a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="col-md-12">
+                    <h3>Pas encore d'articles</h3>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
