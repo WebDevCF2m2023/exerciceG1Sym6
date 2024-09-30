@@ -10,7 +10,19 @@
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" href="{{ path('homepage') }}">Accueil</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ path('about_me') }}">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
+                    {# on va afficher les liens vers nos section #}
+                    {% for section in sections %}
+                        <li class="nav-item"><a class="nav-link" href="{{ path('section',{id:section.id}) }}">{{ section.sectionTitle }}</a></li>
+                    {% endfor %}
+                    {# si nous sommes connectés #}
+                    {% if is_granted('IS_AUTHENTICATED') %}
+                        <li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item"><a class="nav-link" href="{{ path('app_admin') }}">Administration</a></li>
+                        {% endif %}
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">Connexion</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>

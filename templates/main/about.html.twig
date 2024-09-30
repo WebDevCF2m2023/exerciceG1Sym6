@@ -3,7 +3,7 @@
 {# On surcharge le bloc parent  #}
 {% block title %}{{ parent() }}  {% endblock %}
 
-{% block header %}
+{% block content %}
     <h1 class="text-center mt-5">{{ title }}</h1>
     <p class="mt-5 text-center">{{ homepage_text }}</p>
 {% endblock %}
