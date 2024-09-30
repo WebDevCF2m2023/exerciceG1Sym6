@@ -27,7 +27,7 @@
                         <i class="ti-timer"></i>2 Min To Read
                     </li>
                     <li class="list-inline-item">
-                        <i class="ti-calendar"></i>{{ rand.postDateCreated ? rand.postDateCreated|date('Y-m-d H:i:s') : '' }}
+                        <i class="ti-calendar"></i>{{ rand.postDatePublished ? rand.postDatePublished|date('Y-m-d H:i:s') : '' }}
                     </li>
                     <li class="list-inline-item">
                         <ul class="card-meta-tag list-inline">
@@ -55,7 +55,7 @@
                     <h4><a href="{{ path("app_post_show", {id: post.id}) }}" class="post-title">{{ post.postTitle }}</a></h4>
                     <ul class="card-meta list-inline mb-0">
                         <li class="list-inline-item mb-0">
-                            <i class="ti-calendar"></i>{{ post.postDateCreated ? post.postDateCreated|date('Y-m-d H:i:s') : '' }}
+                            <i class="ti-calendar"></i>{{ post.postDatePublished ? post.postDatePublished|date('Y-m-d H:i:s') : '' }}
                         </li>
                         <li class="list-inline-item mb-0">
                             <i class="ti-timer"></i>2 Min To Read
@@ -88,7 +88,7 @@
                         <i class="ti-timer"></i>2 Min To Read
                     </li>
                     <li class="list-inline-item">
-                        <i class="ti-calendar"></i>{{ rand.postDateCreated ? rand.postDateCreated|date('Y-m-d H:i:s') : '' }}
+                        <i class="ti-calendar"></i>{{ rand.postDatePublished ? rand.postDatePublished|date('Y-m-d H:i:s') : '' }}
                     </li>
                     <li class="list-inline-item">
                         <ul class="card-meta-tag list-inline">
@@ -115,7 +115,7 @@
                 <div class="col-lg-8  mb-5 mb-lg-0">
                     <h2 class="h5 section-title">Recent Post</h2>
 
-                    {% for post in posts %}
+                    {% for post in posts|slice(0,3) %}
                         <article class="card mb-4">
                             <div class="post-slider">
                                 <img src="{{ asset(post.postImgLoc | default('https://placehold.co/730x365')) }}" class="card-img-top" alt="post-thumb">
@@ -133,7 +133,7 @@
                                         <i class="ti-timer"></i>2 Min To Read
                                     </li>
                                     <li class="list-inline-item">
-                                        <i class="ti-calendar"></i>14 jan, 2020
+                                        <i class="ti-calendar"></i>{{ post.postDatePublished ? post.postDatePublished|date('Y-m-d H:i:s') : '' }}
                                     </li>
                                     <li>
                                     <ul class="card-meta-tag list-inline">
@@ -204,47 +204,23 @@
                         <h4 class="widget-title">Recent Post</h4>
 
                         <!-- post-item -->
+                        {% set latestPosts = posts|length < 6 ? posts|slice(0,3) : posts|slice(3,6) %}
+                        {% for post in latestPosts %}
                         <article class="widget-card">
                             <div class="d-flex">
-                                <img class="card-img-sm" src="{{ asset('images/post/post-10.jpg') }}">
+                                <img class="card-img-sm" src="{{ asset(post.postImgLoc) }}">
                                 <div class="ml-3">
-                                    <h5><a class="post-title" href="post/elements/">Elements That You Can Use In This Template.</a></h5>
+                                    <h5><a class="post-title" href="{{ path('app_post_show', { id: post.id }) }}">{{ post.postTitle }}</a></h5>
                                     <ul class="card-meta list-inline mb-0">
                                         <li class="list-inline-item mb-0">
-                                            <i class="ti-calendar"></i>15 jan, 2020
+                                            <i class="ti-calendar"></i>{{ post.postDatePublished ? post.postDatePublished|date('Y-m-d H:i:s') : '' }}
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </article>
+                        {% endfor %}
 
-                        <article class="widget-card">
-                            <div class="d-flex">
-                                <img class="card-img-sm" src="{{ asset('images/post/post-3.jpg') }}">
-                                <div class="ml-3">
-                                    <h5><a class="post-title" href="post-details.html">Advice From a Twenty Something</a></h5>
-                                    <ul class="card-meta list-inline mb-0">
-                                        <li class="list-inline-item mb-0">
-                                            <i class="ti-calendar"></i>14 jan, 2020
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article class="widget-card">
-                            <div class="d-flex">
-                                <img class="card-img-sm" src="{{ asset('images/post/post-7.jpg') }}">
-                                <div class="ml-3">
-                                    <h5><a class="post-title" href="post-details.html">Advice From a Twenty Something</a></h5>
-                                    <ul class="card-meta list-inline mb-0">
-                                        <li class="list-inline-item mb-0">
-                                            <i class="ti-calendar"></i>14 jan, 2020
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </article>
                     </div>
 
                     <!-- Social -->
