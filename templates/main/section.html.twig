@@ -1,11 +1,49 @@
 {% extends 'template.html.twig' %}
 
-    {% block title %}
-        {{ parent() }} Section
-    {% endblock %}
 
 {% block mainBody %}
+
     {% for section in sections %}
         <p>{{ section.postTitle }}</p>
+        <div class="table-responsive pb-5 mb-5">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th class="text-center">Title</th>
+                    <th class="text-center">Content</th>
+                    <th class="text-center">Created</th>
+                    <th class="text-center">Published</th>
+                    <th class="text-center">Sections</th>
+                    <th class="text-center">Tags</th>
+                    <th class="text-center">Show</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for post in sections %}
+                    <tr>
+                        <td>{{ post.postTitle }}</td>
+                        <td>{{ post.postText|slice(0,50) }}</td>
+                        <td>{{ post.postDateCreated ? post.postDateCreated|date('Y-m-d H:i:s') : "" }}</td>
+                        <td>{{ post.postDatePublished ? post.postDatePublished|date('Y-m-d H:i:s') : "" }}</td>
+                        <td>
+                            <ul>
+                                {% for sect in post.sections %}
+                                    <li><a href="{{ path('app_section',{id: sect.id}) }}">{{ sect.sectionTitle }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                {% for tag in post.tags %}
+                                    <li><a href="{{ path('app_tag',{id: tag.id}) }}">{{ tag.tagName }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td><a href="{{ path('app_post_show',{id: post.id}) }}">Show</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% endfor %}
 {% endblock %}
