@@ -7,24 +7,22 @@
 {% block mainBody %}
 
 <div class="table-responsive pb-5 mb-5">
-    <table class="table table-bordered table-striped" data-toggle="table" data-show-columns="true" data-search="true"data-pagination="true" data-checkbox-header="true">
+    <table class="table table-bordered table-striped">
         {% for post in posts|slice(0,1) %}
             <p class="h3 text-center">{{ post.user.userRealName }}</p>
         {% endfor %}
         <thead>
         <tr>
-            <th class="text-center"  data-sortable="true">Title</th>
-            <th class="text-center"  data-sortable="true">Content</th>
-            <th class="text-center"  data-sortable="true">Created</th>
-            <th class="text-center"  data-sortable="true">Published</th>
-            <th class="text-center"  data-sortable="true">Sections</th>
-
+            <th class="text-center">Title</th>
+            <th class="text-center">Content</th>
+            <th class="text-center">Created</th>
+            <th class="text-center">Published</th>
+            <th class="text-center">Sections</th>
+            <th class="text-center">Tags</th>
             <th class="text-center">Show</th>
-
         </tr>
         </thead>
         <tbody>
-
             {% for post in posts %}
         <tr>
             <td>{{ post.postTitle }}</td>
@@ -33,15 +31,21 @@
             <td>{{ post.postDatePublished ? post.postDatePublished|date('Y-m-d H:i:s') : "" }}</td>
             <td>
                 <ul>
-                {% for sect in post.sections %}
-                    <li>{{ sect.sectionTitle }}</li>
+                    {% for sect in post.sections %}
+                        <li><a href="{{ path('app_section',{id: sect.id}) }}">{{ sect.sectionTitle }}</a></li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                {% for tag in post.tags %}
+                    <li><a href="{{ path('app_tag',{id: tag.id}) }}">{{ tag.tagName }}</a></li>
                 {% endfor %}
                 </ul>
             </td>
             <td><a href="{{ path('app_post_show',{id: post.id}) }}">Show</a></td>
         </tr>
             {% endfor %}
-
         </tbody>
     </table>
 </div>
