@@ -1,5 +1,7 @@
 {% extends 'template.html.twig' %}
-
+    {% block title %}
+        {{ parent() }} Section
+    {% endblock %}
 
 {% block mainBody %}
     {% if sections is empty %}

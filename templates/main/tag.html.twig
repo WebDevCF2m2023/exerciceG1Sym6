@@ -25,8 +25,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for post in tags %}
                     <tr>
+                {% for post in tags %}
                         <td>{{ post.postTitle }}</td>
                         <td>{{ post.postText|slice(0,50) }}</td>
                         <td>{{ post.postDateCreated ? post.postDateCreated|date('Y-m-d H:i:s') : "" }}</td>
@@ -34,7 +34,7 @@
                         <td>
                             <ul>
                                 {% for sect in post.sections %}
-                                    <li><a href="{{ path('app_section',{id: sect.id}) }}">{{ sect.sectionTitle }}</a></li>
+                                    <li><a href="{{ path('app_tag',{id: sect.id}) }}">{{ sect.sectionTitle }}</a></li>
                                 {% endfor %}
                             </ul>
                         </td>
