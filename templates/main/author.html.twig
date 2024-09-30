@@ -5,7 +5,12 @@
     {% endblock %}
 
 {% block mainBody %}
-
+        {% if posts is empty %}
+            <div class="flex flex-col text-center my-5 py-5">
+            <p class="h3 text-center mb-5">This person has yet to write a post</p>
+            <a href="{{ path('app_main') }}"><p>Return</p></a>
+            </div>
+        {% else %}
 <div class="table-responsive pb-5 mb-5">
     <table class="table table-bordered table-striped">
         {% for post in posts|slice(0,1) %}
@@ -49,5 +54,6 @@
         </tbody>
     </table>
 </div>
+    {% endif %}
 
 {% endblock %}

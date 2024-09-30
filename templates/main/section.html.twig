@@ -2,7 +2,12 @@
 
 
 {% block mainBody %}
-
+    {% if sections is empty %}
+    <div class="flex flex-col text-center my-5 py-5">
+        <p class="h3 text-center mb-5">There are no posts in this section, unfortunately.</p>
+        <a href="{{ path('app_main') }}"><p>Return</p></a>
+    </div>
+    {% else %}
     {% for section in sections %}
         <p>{{ section.postTitle }}</p>
         <div class="table-responsive pb-5 mb-5">
@@ -46,4 +51,5 @@
             </table>
         </div>
     {% endfor %}
+    {% endif %}
 {% endblock %}

@@ -77,6 +77,7 @@ class PostRepository extends ServiceEntityRepository
             ->orderBy('p.postDateCreated', 'DESC')
             ->getQuery()
             ->getResult();
+
 /*
 SELECT  p.* FROM section s
 LEFT JOIN post_section phs
