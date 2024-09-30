@@ -5,7 +5,45 @@
     {% endblock %}
 
 {% block mainBody %}
-    {% for post in posts %}
-        <p>{{ post.postTitle }}</p>
-    {% endfor %}
+
+<div class="table-responsive pb-5 mb-5">
+    <table class="table table-bordered table-striped" data-toggle="table" data-show-columns="true" data-search="true"data-pagination="true" data-checkbox-header="true">
+        {% for post in posts|slice(0,1) %}
+            <p class="h3 text-center">{{ post.user.userRealName }}</p>
+        {% endfor %}
+        <thead>
+        <tr>
+            <th class="text-center"  data-sortable="true">Title</th>
+            <th class="text-center"  data-sortable="true">Content</th>
+            <th class="text-center"  data-sortable="true">Created</th>
+            <th class="text-center"  data-sortable="true">Published</th>
+            <th class="text-center"  data-sortable="true">Sections</th>
+
+            <th class="text-center">Show</th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+            {% for post in posts %}
+        <tr>
+            <td>{{ post.postTitle }}</td>
+            <td>{{ post.postText|slice(0,50) }}</td>
+            <td>{{ post.postDateCreated ? post.postDateCreated|date('Y-m-d H:i:s') : "" }}</td>
+            <td>{{ post.postDatePublished ? post.postDatePublished|date('Y-m-d H:i:s') : "" }}</td>
+            <td>
+                <ul>
+                {% for sect in post.sections %}
+                    <li>{{ sect.sectionTitle }}</li>
+                {% endfor %}
+                </ul>
+            </td>
+            <td><a href="{{ path('app_post_show',{id: post.id}) }}">Show</a></td>
+        </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
 {% endblock %}
