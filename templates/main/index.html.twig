@@ -1,0 +1,16 @@
+{% extends 'template.front.html.twig' %}
+
+
+{% block body %}
+    {% block nav %}
+        {{ parent() }}
+    {% endblock %}
+    {% block banner %}
+        {{ parent() }}
+        {% endblock %}
+    {% block content %}
+        {{ parent() }}
+        {% endblock %}
+
+
+{% endblock %}
