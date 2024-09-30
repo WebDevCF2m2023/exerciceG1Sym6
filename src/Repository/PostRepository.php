@@ -6,6 +6,7 @@ use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 /**
  * @extends ServiceEntityRepository<Post>
  */
@@ -108,4 +109,5 @@ WHERE p.post_is_published = true
 AND t.id = 2
          */
     }
+
 }

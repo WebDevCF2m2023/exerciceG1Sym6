@@ -7,31 +7,33 @@
 {% block mainBody %}
     <div class="col-lg-4 mb-5">
         <h2 class="h5 section-title">Editors Pick</h2>
+        {% set rand = random(posts) %}
+{{ dump(rand) }}
         <article class="card">
             <div class="post-slider slider-sm">
-                <img src="{{ asset('images/post/post-1.jpg') }}" class="card-img-top" alt="post-thumb">
+                <img src="{{ asset(rand.postImgLoc) }}" class="card-img-top" alt="post-thumb">
             </div>
 
             <div class="card-body">
-                <h3 class="h4 mb-3"><a class="post-title" href="post-details.html">Use apples to give your bakes caramel and a moist texture</a></h3>
+                <h3 class="h4 mb-3"><a class="post-title" href="{{ path('app_post_show', {id: rand.id}) }}">{{ rand.postTitle }}</a></h3>
                 <ul class="card-meta list-inline">
                     <li class="list-inline-item">
-                        <a href="author-single.html" class="card-meta-author">
-                            <img src="{{ asset('images/john-doe.jpg') }}">
-                            <span>Charls Xaviar</span>
+                        <a href="{{ path('app_author', {id: rand.id}) }}" class="card-meta-author">
+                            <img src="{{ asset('images/author-.jpg') }}">
+                            <span>{{ rand.user.userRealName }}</span>
                         </a>
                     </li>
                     <li class="list-inline-item">
                         <i class="ti-timer"></i>2 Min To Read
                     </li>
                     <li class="list-inline-item">
-                        <i class="ti-calendar"></i>14 jan, 2020
+                        <i class="ti-calendar"></i>{{ rand.postDateCreated ? rand.postDateCreated|date('Y-m-d H:i:s') : '' }}
                     </li>
                     <li class="list-inline-item">
                         <ul class="card-meta-tag list-inline">
-                            <li class="list-inline-item"><a href="tags.html">Color</a></li>
-                            <li class="list-inline-item"><a href="tags.html">Recipe</a></li>
-                            <li class="list-inline-item"><a href="tags.html">Fish</a></li>
+                            {% for tag in rand %}
+                                <li class="list-inline-item"><a href="{{ path('app_tag', {id: tag.id}) }}">{{ tag.tagName }}</a></li>
+                            {% endfor %}
                         </ul>
                     </li>
                 </ul>
@@ -39,6 +41,7 @@
                 <a href="post-details.html" class="btn btn-outline-primary">Read More</a>
             </div>
         </article>
+
     </div>
     <div class="col-lg-4 mb-5">
         <h2 class="h5 section-title">Trending Post</h2>

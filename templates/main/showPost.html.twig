@@ -3,9 +3,10 @@
 {% block title %}{{ parent() }} | Posts{% endblock %}
     {% block sideBar %}{% endblock %}
 {% block mainBody %}
-    <div class="d-flex flex-column align-items-center text-center mb-5 pb-5">
+    <div class="d-flex flex-column align-items-center text-center text-wrap mb-5 pb-5">
         <h1>{{ post.postTitle }}</h1>
-        <pre>{{ post.postText }}</pre>
+        <img src="{{ asset(post.postImgLoc) }}" alt="{{ post.user.userRealName }}" class="w-25 h-25">
+        <pre class="mx-5">{{ post.postText }}</pre>
         <p>Created : {{ post.postDateCreated ? post.postDateCreated|date('Y-m-d H:i:s') : '' }} </p>
         <p> Published : {{ post.postDatePublished ? post.postDatePublished|date('Y-m-d H:i:s') : '' }}</p>
 
