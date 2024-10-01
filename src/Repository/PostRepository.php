@@ -61,6 +61,7 @@ class PostRepository extends ServiceEntityRepository
             ->setParameter('published', true)
             ->andWhere('u.id = :id')
             ->setParameter('id', $authorId)
+
             ->orderBy('p.postDateCreated', 'DESC')
             ->getQuery()
             ->getResult();
