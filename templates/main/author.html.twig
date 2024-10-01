@@ -30,7 +30,7 @@
         <tbody>
             {% for post in posts %}
         <tr>
-            <td>{{ post.postTitle }}</td>
+            <td><a href="{{ path('app_post_show', {id: post.id}) }}">{{ post.postTitle }}</a></td>
             <td>{{ post.postText|slice(0,50) }}</td>
             <td>{{ post.postDateCreated ? post.postDateCreated|date('Y-m-d H:i:s') : "" }}</td>
             <td>{{ post.postDatePublished ? post.postDatePublished|date('Y-m-d H:i:s') : "" }}</td>

@@ -19,7 +19,7 @@
                 <ul class="card-meta list-inline">
                     <li class="list-inline-item">
                         <a href="{{ path('app_author', {id: rand.id}) }}" class="card-meta-author">
-                            <img src="{{ asset('images/author-.jpg') }}">
+                            <img src="{{ asset(rand.user.userImgLoc) }}">
                             <span>{{ rand.user.userRealName }}</span>
                         </a>
                     </li>
