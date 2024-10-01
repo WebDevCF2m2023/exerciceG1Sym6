@@ -19,7 +19,7 @@ class MainController extends AbstractController
                           PostRepository $postRepository,
                           UserRepository $userRepository): Response
     {
-        $posts = $postRepository->getPublishedPosts();
+        $posts = $postRepository->getPostsAndAllInfo();
 
         return $this->render('main/index.html.twig', [
             'tags' => $tagRepository->findAll(),
