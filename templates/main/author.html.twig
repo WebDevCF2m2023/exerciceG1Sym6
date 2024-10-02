@@ -1,0 +1,59 @@
+{% extends 'template.html.twig' %}
+
+    {% block title %}
+        {{ parent() }} Author
+    {% endblock %}
+
+{% block mainBody %}
+        {% if posts is empty %}
+            <div class="flex flex-col text-center my-5 py-5">
+            <p class="h3 text-center mb-5">This person has yet to write a post</p>
+            <a href="{{ path('app_main') }}"><p>Return</p></a>
+            </div>
+        {% else %}
+<div class="table-responsive pb-5 mb-5">
+    <table class="table table-bordered table-striped">
+        {% for post in posts|slice(0,1) %}
+            <p class="h3 text-center">{{ post.user.userRealName }}</p>
+        {% endfor %}
+        <thead>
+        <tr>
+            <th class="text-center">Title</th>
+            <th class="text-center">Content</th>
+            <th class="text-center">Created</th>
+            <th class="text-center">Published</th>
+            <th class="text-center">Sections</th>
+            <th class="text-center">Tags</th>
+            <th class="text-center">Show</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+        <tr>
+            <td><a href="{{ path('app_post_show', {id: post.id}) }}">{{ post.postTitle }}</a></td>
+            <td>{{ post.postText|slice(0,50) }}</td>
+            <td>{{ post.postDateCreated ? post.postDateCreated|date('Y-m-d H:i:s') : "" }}</td>
+            <td>{{ post.postDatePublished ? post.postDatePublished|date('Y-m-d H:i:s') : "" }}</td>
+            <td>
+                <ul>
+                    {% for sect in post.sections %}
+                        <li><a href="{{ path('app_section',{id: sect.id}) }}">{{ sect.sectionTitle }}</a></li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                {% for tag in post.tags %}
+                    <li><a href="{{ path('app_tag',{id: tag.id}) }}">{{ tag.tagName }}</a></li>
+                {% endfor %}
+                </ul>
+            </td>
+            <td><a href="{{ path('app_post_show',{id: post.id}) }}">Show</a></td>
+        </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    {% endif %}
+
+{% endblock %}

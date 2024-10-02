@@ -62,6 +62,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'user')]
     private Collection $posts;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $userDetails = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $userImgLoc = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -235,6 +241,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $post->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUserDetails(): ?string
+    {
+        return $this->userDetails;
+    }
+
+    public function setUserDetails(?string $userDetails): static
+    {
+        $this->userDetails = $userDetails;
+
+        return $this;
+    }
+
+    public function getUserImgLoc(): ?string
+    {
+        return $this->userImgLoc;
+    }
+
+    public function setUserImgLoc(?string $userImgLoc): static
+    {
+        $this->userImgLoc = $userImgLoc;
 
         return $this;
     }
