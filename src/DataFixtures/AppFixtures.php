@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Post;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 # On va hacher les mots de passe
@@ -10,6 +11,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Faker\Factory as Faker;
 # on va récupérer notre entité User
 use App\Entity\User;
+# on va récupérer notre entité Post
+use App\Entity\Post;
 
 class AppFixtures extends Fixture
 {
@@ -51,6 +54,10 @@ class AppFixtures extends Fixture
         $user->setUserActive(true);
         $user->setUserRealName('The Admin !');
 
+        // création/ update d'un tableau contenant
+        // les User qui peuvent écrire un article
+        $users[] = $user;
+
         # Utilisation du $manager pour mettre le
         # User en mémoire
         $manager->persist($user);
@@ -67,6 +74,11 @@ class AppFixtures extends Fixture
             $user->setPassword($pwdHash);
             $user->setUserActive(true);
             $user->setUserRealName('The Redac '.$i.' !');
+
+            // création/ update d'un tableau contenant
+            // les User qui peuvent écrire un article
+            $users[] = $user;
+
             # Utilisation du $manager pour mettre le
             # User en mémoire
             $manager->persist($user);
@@ -84,6 +96,11 @@ class AppFixtures extends Fixture
             $user->setPassword($pwdHash);
             $user->setUserActive(true);
             $user->setUserRealName('The Moderator '.$i.' !');
+
+            // création/ update d'un tableau contenant
+            // les User qui peuvent écrire un article
+            $users[] = $user;
+
             # Utilisation du $manager pour mettre le
             # User en mémoire
             $manager->persist($user);
@@ -122,7 +139,17 @@ class AppFixtures extends Fixture
     ###
     # GESTION de POST
     ###
+        for($i = 1; $i <= 100; $i++){
+            $post = new Post();
+            // on prend un auteur au hasard
+            $user = array_rand($users);
+            $post->setUser($user);
+            $title = $faker->realTextBetween(20,150);
+            $post->setPostTitle($title);
 
+
+            $manager->persist($post);
+        }
 
         # envoie à la base de donnée (commit)
         $manager->flush();
