@@ -57,6 +57,22 @@ class AppFixtures extends Fixture
             $manager->persist($user);
         }
 
+        ###
+        # Instanciation de 3 modérateurs
+        #
+        for($i = 1; $i <= 3; $i++){
+            $user = new User();
+            $user->setUsername('modo'.$i);
+            $user->setUserMail('modo'.$i.'@gmail.com');
+            $user->setRoles(['ROLE_MODERATOR']);
+            $pwdHash = $this->passwordHasher->hashPassword($user, 'modo'.$i);
+            $user->setPassword($pwdHash);
+            $user->setUserActive(true);
+            $user->setUserRealName('The Moderator '.$i.' !');
+            # Utilisation du $manager pour mettre le
+            # User en mémoire
+            $manager->persist($user);
+        }
         # envoie à la base de donnée (commit)
         $manager->flush();
     }
