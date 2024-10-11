@@ -150,14 +150,27 @@ class AppFixtures extends Fixture
     # attribut contenant le hacher de mot de passe
     private UserPasswordHasherInterface $passwordHasher;
 
+
     # constructeur qui remplit les attributs
-    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    public function __construct(
+        UserPasswordHasherInterface $passwordHasher,
+
+    )
     {
         # hache le mot de passe
         $this->passwordHasher = $passwordHasher;
     }
+
+    # constructeur qui remplit les attributs
     public function load(ObjectManager $manager): void
     {
+
+    ###
+    # GESTION de USER
+    ###
+        // Création de Faker
+        $faker = Faker::create();
+
         ###
         # Instanciation d'un User Admin
         #
@@ -210,8 +223,6 @@ class AppFixtures extends Fixture
             $manager->persist($user);
         }
 
-        // instanciation de Faker en français
-        $faker = Faker::create('fr_FR');
 
         ###
         # Instanciation entre 20 et 40 User sans rôles
@@ -242,10 +253,16 @@ class AppFixtures extends Fixture
 
         }
 
+    ###
+    # GESTION de POST
+    ###
+
+        
         # envoie à la base de donnée (commit)
         $manager->flush();
     }
 }
+
 
 ```
 
