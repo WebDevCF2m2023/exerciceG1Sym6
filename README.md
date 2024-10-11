@@ -114,4 +114,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 - redac3 -> redac3 -> [ROLE_REDAC]
 - redac4 -> redac4 -> [ROLE_REDAC]
 - redac5 -> redac5 -> [ROLE_REDAC]
-- moderator -> moderator -> [ROLE_MODERATOR]
+- moderator1 -> moderator1 -> [ROLE_MODERATOR]
+- moderator2 -> moderator2 -> [ROLE_MODERATOR]
+- moderator3 -> moderator3 -> [ROLE_MODERATOR]
+

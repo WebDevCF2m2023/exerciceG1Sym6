@@ -40,6 +40,23 @@ class AppFixtures extends Fixture
         # User en mémoire
         $manager->persist($user);
 
+        ###
+        # Instanciation de 5 Rédacteurs
+        #
+        for($i = 1; $i <= 5; $i++){
+            $user = new User();
+            $user->setUsername('redac'.$i);
+            $user->setUserMail('redac'.$i.'@gmail.com');
+            $user->setRoles(['ROLE_REDAC']);
+            $pwdHash = $this->passwordHasher->hashPassword($user, 'redac'.$i);
+            $user->setPassword($pwdHash);
+            $user->setUserActive(true);
+            $user->setUserRealName('The Redac '.$i.' !');
+            # Utilisation du $manager pour mettre le
+            # User en mémoire
+            $manager->persist($user);
+        }
+
         # envoie à la base de donnée (commit)
         $manager->flush();
     }
