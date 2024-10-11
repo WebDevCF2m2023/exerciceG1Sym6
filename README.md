@@ -117,7 +117,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 - moderator1 -> moderator1 -> [ROLE_MODERATOR]
 - moderator2 -> moderator2 -> [ROLE_MODERATOR]
 - moderator3 -> moderator3 -> [ROLE_MODERATOR]
-- une trentaine d'utilisateur sans rôle
+- une trentaine d'utilisateur sans rôle le login == mot de passe
 
 On va devoir ajouter un module permettant de créer du faux contenu.
 
@@ -128,5 +128,9 @@ On va devoir ajouter un module permettant de créer du faux contenu.
 La documentation :
 
 https://fakerphp.org/
+
+#### Fixtures ok pour les `User`
+
+On peut se connecter avec les différents utilisateurs
 
 
