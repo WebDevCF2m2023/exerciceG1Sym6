@@ -2,17 +2,25 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Post;
+
+
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 # On va hacher les mots de passe
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 # Chargement de Faker et création d'un alias nommé Faker
 use Faker\Factory as Faker;
+# chargement de slugify
+use Cocur\Slugify\Slugify;
 # on va récupérer notre entité User
 use App\Entity\User;
 # on va récupérer notre entité Post
 use App\Entity\Post;
+# on va récupérer notre entité Section
+use App\Entity\Section;
+# on va récupérer notre entité Tag
+use App\Entity\Tag;
 
 class AppFixtures extends Fixture
 {
@@ -38,8 +46,9 @@ class AppFixtures extends Fixture
     # GESTION de USER
     ###
         // Création de Faker
-        $faker = Faker::create();
-
+        $faker = Faker::create('fr_FR');
+        // Création du slugify
+        $slugify = new Slugify();
         ###
         # Instanciation d'un User Admin
         #
@@ -99,6 +108,7 @@ class AppFixtures extends Fixture
 
             // création/ update d'un tableau contenant
             // les User qui peuvent écrire un article
+            // ou un commentaire
             $users[] = $user;
 
             # Utilisation du $manager pour mettre le
@@ -131,6 +141,8 @@ class AppFixtures extends Fixture
             # Création d'un 'vrai' nom en français
             $realName = $faker->name();
             $user->setUserRealName($realName);
+            // on garde les utilisateurs pour les commentaires
+            $usersComment[] = $user;
 
             $manager->persist($user);
 
@@ -143,12 +155,63 @@ class AppFixtures extends Fixture
             $post = new Post();
             // on prend un auteur au hasard
             $user = array_rand($users);
-            $post->setUser($user);
+            $post->setUser($users[$user]);
+            // titre entre 20 et 150 caractères
             $title = $faker->realTextBetween(20,150);
             $post->setPostTitle($title);
-
+            // texte entre 3 et 6 paragraphes
+            $post->setPostText($faker->paragraphs(mt_rand(3,6), true));
+            // on va remonter dans le passé entre 30 et 60 jours
+            $day = mt_rand(30,60);
+            $post->setPostDateCreated(new DateTime("now -$day day"));
+            // on va publier 3 articles sur 4 (+-) 1,2,3 => true 4 => false
+            $published = mt_rand(1,4) < 4;
+            $post->setPostIsPublished($published);
+            if($published){
+                // on va remonter dans le passé entre 5 et 15 jours
+                $day = mt_rand(5,15);
+                $post->setPostDatePublished(new DateTime("now -$day day"));
+            }
+            // on garde les postes
+            $posts[] = $post;
 
             $manager->persist($post);
+
+        }
+        ###
+        # GESTION de Section
+        ###
+
+        for($i = 1; $i <= 5; $i++){
+            $section = new Section();
+            $section->setSectionTitle($faker->realTextBetween(8,18));
+            $section->setSectionDescription($faker->realTextBetween(100,400));
+            $postRandom = array_rand($posts, mt_rand(1,count($posts)));
+            foreach ($postRandom as $post){
+                $section->addPost($posts[$post]);
+            }
+
+
+            $manager->persist($section);
+        }
+
+        ###
+        # GESTION de Tag
+        ###
+        $nbTags = mt_rand(20,35);
+        for($i = 1; $i <= $nbTags; $i++){
+            $tag = new Tag();
+            // création du nom
+            $name = $faker->words(mt_rand(2,3),true);
+            $tag->setTagName($name);
+            $tag->setTagSlug($slugify->slugify($name));
+            $postRandom = array_rand($posts, mt_rand(1,count($posts)));
+            foreach ($postRandom as $post){
+                $tag->addPost($posts[$post]);
+            }
+
+
+            $manager->persist($tag);
         }
 
         # envoie à la base de donnée (commit)

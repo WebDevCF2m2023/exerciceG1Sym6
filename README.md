@@ -268,10 +268,18 @@ class AppFixtures extends Fixture
 
 On peut se connecter avec les différents utilisateurs
 
-### Création des `Post` fixtures
+### Chargement du slugify
 
-La principale difficulté, c'est qu'un post doit être écrit par un utilisateur valide !
+https://packagist.org/packages/cocur/slugify
 
-On va donc créer des tableaux des `User` qui peuvent poster des articles !
+    composer require cocur/slugify
+
+### Lancement des `fixtures`
+
+        php bin/console d:f:l
+
+
+
+
 
 
