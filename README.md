@@ -394,7 +394,9 @@ https://packagist.org/packages/cocur/slugify
         php bin/console d:f:l
 
 
+### Twig filter
 
+    composer require twig/string-extra
 
 
 
