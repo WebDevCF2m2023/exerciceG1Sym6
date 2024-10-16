@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 
 
+
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -21,6 +22,8 @@ use App\Entity\Post;
 use App\Entity\Section;
 # on va récupérer notre entité Tag
 use App\Entity\Tag;
+# on va récupérer notre entité Comment
+use App\Entity\Comment;
 
 class AppFixtures extends Fixture
 {
@@ -186,7 +189,7 @@ class AppFixtures extends Fixture
             $section = new Section();
             $section->setSectionTitle($faker->realTextBetween(8,18));
             $section->setSectionDescription($faker->realTextBetween(100,400));
-            $postRandom = array_rand($posts, mt_rand(1,count($posts)));
+            $postRandom = array_rand($posts, mt_rand(2,count($posts)));
             foreach ($postRandom as $post){
                 $section->addPost($posts[$post]);
             }
@@ -205,13 +208,37 @@ class AppFixtures extends Fixture
             $name = $faker->words(mt_rand(2,3),true);
             $tag->setTagName($name);
             $tag->setTagSlug($slugify->slugify($name));
-            $postRandom = array_rand($posts, mt_rand(1,count($posts)));
+            $postRandom = array_rand($posts, mt_rand(2,round(count($posts)/3)));
             foreach ($postRandom as $post){
                 $tag->addPost($posts[$post]);
             }
 
 
             $manager->persist($tag);
+        }
+        ###
+        # GESTION des commentaires
+        ###
+       $nbComments = mt_rand(150,400);
+        for($i = 1; $i <= $nbComments; $i++){
+            $comment = new Comment();
+            $comment->setCommentText($faker->realTextBetween(100,500));
+            // on va récupérer tous les auteurs qui peuvent écrire un commentaire
+            $userAll = array_merge($usersComment,$users);
+            // un commentaire, un utilisateur
+            $userComment = array_rand($userAll);
+            $comment->setUser($userAll[$userComment]);
+            // un commentaire, un article
+            $articleComment = array_rand($posts);
+            $comment->setPost($posts[$articleComment]);
+            // écrit entre 1 et 4 jours
+            $day = mt_rand(1,4);
+            $comment->setCommentDate(new DateTime("now -$day day"));
+            // 3 sur 4 sont validés
+            $validate = mt_rand(1,4)<4;
+            $comment->setCommentVisible($validate);
+
+            $manager->persist($comment);
         }
 
         # envoie à la base de donnée (commit)
